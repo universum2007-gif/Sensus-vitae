@@ -1,0 +1,2 @@
+import {Leaf} from "lucide-react";import{type Language,ui}from"@/lib/site-content";
+export function SiteFooter({lang}:{lang:Language}){return <footer className="mt-20 border-t bg-[#173d30] text-[#f7f1e5]"><div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-center sm:flex-row sm:text-left"><div className="font-editorial flex items-center gap-2 text-lg"><Leaf size={18} className="text-[#d1ad63]"/>Sensus Vitae</div><p className="text-sm tracking-wide text-[#ddd2bd]">{ui[lang].footer}</p></div></footer>}

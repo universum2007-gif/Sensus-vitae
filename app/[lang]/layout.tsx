@@ -1,0 +1,2 @@
+import{notFound}from"next/navigation";import{SiteHeader}from"@/components/site-header";import{SiteFooter}from"@/components/site-footer";import{isLanguage}from"@/lib/site-content";
+export default async function LanguageLayout({children,params}:{children:React.ReactNode;params:Promise<{lang:string}>}){const{lang}=await params;if(!isLanguage(lang))notFound();return <><SiteHeader lang={lang}/>{children}<SiteFooter lang={lang}/></>}
