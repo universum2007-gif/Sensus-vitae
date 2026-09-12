@@ -2,11 +2,50 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 import { and, eq } from "drizzle-orm";
-import { isLanguage, staticArticles } from "@/lib/site-content";
+import { isLanguage, languages, staticArticles, type Language } from "@/lib/site-content";
 import { getDb } from "@/db";
 import { posts } from "@/db/schema";
+import { createPageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }) {
+  const { lang, slug } = await params;
+  if (!isLanguage(lang)) notFound();
+
+  const staticArticle = staticArticles.find((article) => article.lang === lang && article.slug === slug);
+  if (staticArticle) {
+    const equivalentLanguages = languages.filter((language) =>
+      staticArticles.some((article) => article.lang === language && article.slug === slug),
+    );
+    return createPageMetadata({
+      lang,
+      path: `articles/${encodeURIComponent(slug)}`,
+      title: staticArticle.title,
+      description: staticArticle.summary,
+      equivalentLanguages,
+    });
+  }
+
+  try {
+    const [article] = await getDb()
+      .select({ title: posts.title, summary: posts.summary })
+      .from(posts)
+      .where(and(eq(posts.slug, slug), eq(posts.language, lang), eq(posts.status, "published")))
+      .limit(1);
+    if (article) {
+      return createPageMetadata({
+        lang,
+        path: `articles/${encodeURIComponent(slug)}`,
+        title: article.title,
+        description: article.summary,
+        equivalentLanguages: [lang as Language],
+      });
+    }
+  } catch {}
+
+  return {};
+}
 
 export default async function ArticlePage({ params }: { params: Promise<{ lang: string; slug: string }> }) {
   const { lang, slug } = await params;

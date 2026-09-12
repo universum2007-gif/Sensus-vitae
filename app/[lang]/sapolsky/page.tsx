@@ -3,6 +3,7 @@ import { ArrowLeft, BookOpen, Brain, MessageCircleQuestion } from "lucide-react"
 import { notFound } from "next/navigation";
 import { isLanguage } from "@/lib/site-content";
 import { sapolskyContent } from "@/lib/sapolsky-content";
+import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
 
 function FullSummary({paragraphs}:{paragraphs:string[]}) {
   const blocks: React.ReactNode[] = [];
@@ -18,6 +19,12 @@ function FullSummary({paragraphs}:{paragraphs:string[]}) {
     } else blocks.push(<p key={i}>{paragraph}</p>);
   }
   return <>{blocks}</>;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  return createPageMetadata({ lang, path: "sapolsky", ...pageMetadataCopy.sapolsky[lang] });
 }
 
 export default async function SapolskyPage({ params }: { params: Promise<{ lang: string }> }) {

@@ -6,8 +6,15 @@ import { ArrowUpRight, BookOpen } from "lucide-react";
 import { isLanguage, staticArticles, ui } from "@/lib/site-content";
 import { getDb } from "@/db";
 import { posts } from "@/db/schema";
+import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  return createPageMetadata({ lang, path: "library", ...pageMetadataCopy.library[lang] });
+}
 
 export default async function LibraryPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;

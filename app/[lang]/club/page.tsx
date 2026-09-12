@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { BookOpen, MessageCircle, Scale, Sparkles } from "lucide-react";
 import { isLanguage } from "@/lib/site-content";
+import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
 
 const copy = {
   ru: { title:"Клуб осознанной жизни", intro:"Sensus Vitae — пространство живого мышления, диалога и исследования важных вопросов жизни.", items:[["Открытые дискуссии","Свобода воли, любовь, страх, мораль, счастье, смерть и время."],["Книги и авторы","Разбираем идеи глубже пересказа и связываем их с современной психологией."],["Дилеммы и дебаты","Учимся видеть аргументы, проверять убеждения и менять мнение при новых данных."],["Личная рефлексия","Соединяем знание с собственным опытом без давления и готовых ответов."]] },
@@ -10,6 +11,12 @@ const copy = {
 } as const;
 
 const icons = [MessageCircle, BookOpen, Scale, Sparkles];
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  return createPageMetadata({ lang, path: "club", ...pageMetadataCopy.club[lang] });
+}
 
 export default async function ClubPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;

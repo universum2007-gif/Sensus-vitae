@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLanguage } from "@/lib/site-content";
+import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
 
 const copy = {
   ru: {
@@ -68,6 +69,12 @@ const copy = {
     contact: "Ir al formulario de contacto",
   },
 } as const;
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  return createPageMetadata({ lang, path: "privacy", ...pageMetadataCopy.privacy[lang] });
+}
 
 export default async function PrivacyPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;

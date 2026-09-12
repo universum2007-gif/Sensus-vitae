@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Mail, MessageCircle, Users } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
 import { isLanguage } from "@/lib/site-content";
+import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
 
 const copy={
   ru:{eyebrow:"ОБРАТНАЯ СВЯЗЬ",title:"Давайте обмениваться знаниями",intro:"Есть вопрос по материалу, полезная статья, презентация или идея для совместной работы? Напишите мне — я буду рада диалогу с другими студентами и людьми, которым интересны психология и наука.",points:[["Вопросы","Уточнения и обсуждение опубликованных материалов."],["Обмен материалами","Статьи, презентации, конспекты и полезные учебные источники."],["Сотрудничество","Идеи для клуба, совместных разборов и студенческих проектов."]]},
@@ -10,5 +11,11 @@ const copy={
   nl:{eyebrow:"CONTACT",title:"Laten we kennis delen",intro:"Heb je een vraag, een nuttig artikel, een presentatie of een idee om samen te werken? Stuur me een bericht. Ik ga graag in gesprek met andere studenten en iedereen die geïnteresseerd is in psychologie en wetenschap.",points:[["Vragen","Toelichting en gesprek over gepubliceerde materialen."],["Materiaal delen","Artikelen, presentaties, samenvattingen en nuttige studiebronnen."],["Samenwerking","Ideeën voor de club, gezamenlijke besprekingen en studentenprojecten."]]},
 } as const;
 const icons=[MessageCircle,Mail,Users];
+
+export async function generateMetadata({params}:{params:Promise<{lang:string}>}) {
+  const {lang}=await params;
+  if(!isLanguage(lang))notFound();
+  return createPageMetadata({lang,path:"contact",...pageMetadataCopy.contact[lang]});
+}
 
 export default async function ContactPage({params}:{params:Promise<{lang:string}>}){const{lang}=await params;if(!isLanguage(lang))notFound();const c=copy[lang];return <main className="mx-auto max-w-6xl px-5 py-14"><div className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:items-start"><section className="lg:sticky lg:top-32"><p className="text-xs font-bold tracking-[.18em] text-[#98722e]">{c.eyebrow}</p><h1 className="font-editorial mt-4 text-4xl font-bold sm:text-5xl">{c.title}</h1><p className="mt-6 text-lg leading-8 text-[#53655c]">{c.intro}</p><div className="mt-8 space-y-5">{c.points.map(([title,text],i)=>{const Icon=icons[i];return <div key={title} className="flex gap-4"><div className="mt-1 grid size-10 shrink-0 place-items-center rounded-full bg-[#e5dcc8]"><Icon size={18} className="text-[#174f3c]"/></div><div><h2 className="font-editorial text-lg font-bold">{title}</h2><p className="mt-1 leading-6 text-[#5d6d64]">{text}</p></div></div>})}</div></section><ContactForm lang={lang}/></div></main>}

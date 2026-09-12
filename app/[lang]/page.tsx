@@ -6,9 +6,16 @@ import { ArticleCard } from "@/components/article-card";
 import { getDb } from "@/db";
 import { posts } from "@/db/schema";
 import { categories, isLanguage, staticArticles, ui } from "@/lib/site-content";
+import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
 
 const icons = [Brain, ChartNoAxesColumnIncreasing, FlaskConical, Lightbulb, Users, BookMarked];
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  return createPageMetadata({ lang, ...pageMetadataCopy.home[lang] });
+}
 
 export default async function LanguageHome({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;

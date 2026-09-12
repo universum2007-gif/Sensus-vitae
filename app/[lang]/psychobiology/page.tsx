@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Brain, Dna } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
 import { isLanguage, staticArticles, type Language } from "@/lib/site-content";
+import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
 
 const copy: Record<Language, { eyebrow:string; title:string; lead:string; back:string; genetics:string; geneticsLead:string; foundations:string; languageNote:string }> = {
   ru:{eyebrow:"УЧЕБНОЕ НАПРАВЛЕНИЕ",title:"Психобиология",lead:"Как мозг, нервная система, генетика, гормоны, опыт и среда вместе участвуют в формировании поведения.",back:"На главную",genetics:"Генетика и поведение",geneticsLead:"Исследования о наследственных предрасположенностях, полигенности и взаимодействии генов со средой.",foundations:"Основы психобиологии",languageNote:""},
@@ -10,6 +11,12 @@ const copy: Record<Language, { eyebrow:string; title:string; lead:string; back:s
   en:{eyebrow:"LEARNING AREA",title:"Psychobiology",lead:"How the brain, nervous system, genetics, hormones, experience and environment jointly shape behaviour.",back:"Back home",genetics:"Genetics and behaviour",geneticsLead:"Research on inherited predispositions, polygenicity and gene–environment interplay.",foundations:"Psychobiology foundations",languageNote:"This new study note is available in Russian."},
   nl:{eyebrow:"LEERGEBIED",title:"Psychobiologie",lead:"Hoe hersenen, zenuwstelsel, genetica, hormonen, ervaring en omgeving samen gedrag vormen.",back:"Naar start",genetics:"Genetica en gedrag",geneticsLead:"Onderzoek naar erfelijke aanleg, polygeniciteit en de wisselwerking tussen genen en omgeving.",foundations:"Basis van de psychobiologie",languageNote:"Deze nieuwe studienotitie is beschikbaar in het Russisch."},
 };
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  return createPageMetadata({ lang, path: "psychobiology", ...pageMetadataCopy.psychobiology[lang] });
+}
 
 export default async function PsychobiologyPage({params}:{params:Promise<{lang:string}>}) {
   const {lang}=await params;
