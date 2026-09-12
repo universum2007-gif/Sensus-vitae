@@ -5,6 +5,14 @@ import { isLanguage } from "@/lib/site-content";
 import { sapolskyContent } from "@/lib/sapolsky-content";
 import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
 
+const subsectionHeadings = new Set([
+  "Итог главы", "Chapter conclusion", "Conclusión del capítulo", "Conclusie van het hoofdstuk",
+  "Важные нюансы", "Important qualifications", "Matices importantes", "Belangrijke nuances",
+  "Объяснение Сапольски", "Sapolsky’s explanation", "La explicación de Sapolsky", "Sapolsky’s uitleg",
+  "Что добавляет современная наука", "What current science adds", "Lo que añade la ciencia actual", "Wat de huidige wetenschap toevoegt",
+  "Источники к современному уточнению", "Sources for the modern qualification", "Fuentes para la actualización científica", "Bronnen voor de wetenschappelijke actualisering",
+]);
+
 function FullSummary({paragraphs}:{paragraphs:string[]}) {
   const blocks: React.ReactNode[] = [];
   for (let i=0;i<paragraphs.length;i++) {
@@ -14,7 +22,7 @@ function FullSummary({paragraphs}:{paragraphs:string[]}) {
       while (i<paragraphs.length && paragraphs[i].startsWith("* ")) items.push(paragraphs[i++].slice(2));
       i--;
       blocks.push(<ul key={i} className="list-disc space-y-3 pl-6">{items.map((item,j)=><li key={j}>{item}</li>)}</ul>);
-    } else if ((/^\d\. /.test(paragraph) && paragraph.length<100) || ["Итог главы","Chapter conclusion","Conclusión del capítulo","Conclusie van het hoofdstuk","Важные нюансы","Important qualifications","Matices importantes","Belangrijke nuances"].includes(paragraph)) {
+    } else if ((/^\d\. /.test(paragraph) && paragraph.length<100) || subsectionHeadings.has(paragraph)) {
       blocks.push(<h5 key={i} className="font-editorial pt-3 text-xl font-bold text-[#173d30]">{paragraph}</h5>);
     } else blocks.push(<p key={i}>{paragraph}</p>);
   }
