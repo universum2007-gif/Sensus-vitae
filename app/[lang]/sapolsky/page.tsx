@@ -171,6 +171,22 @@ export default async function SapolskyPage({ params }: { params: Promise<{ lang:
             loading="lazy"
             className="mb-7 block h-auto w-full rounded-2xl"
           />}
+          {chapter.number === 17 && <img
+            src="/sapolsky-chapter-17.jpeg"
+            alt={{ru:"Художественная иллюстрация социальной иерархии и здоровья: люди находятся на разных уровнях каменной лестницы рядом с указателями «Статус», «Контроль», «Принадлежность», «Возможности» и «Здоровье».",es:"Ilustración artística de la jerarquía social y la salud: varias personas ocupan distintos niveles de una escalera de piedra junto a señales de estatus, control, pertenencia, oportunidades y salud.",en:"Artistic illustration of social hierarchy and health: people occupy different levels of stone steps beside signs for status, control, belonging, opportunities and health.",nl:"Artistieke illustratie van sociale hiërarchie en gezondheid: mensen bevinden zich op verschillende niveaus van een stenen trap naast wegwijzers voor status, controle, verbondenheid, kansen en gezondheid."}[lang]}
+            width={1536}
+            height={1024}
+            loading="lazy"
+            className="mb-7 block h-auto w-full rounded-2xl"
+          />}
+          {chapter.number === 18 && <img
+            src="/sapolsky-chapter-18.jpeg"
+            alt={{ru:"Художественная иллюстрация способов справляться со стрессом: женщина смотрит на символы социальной поддержки, движения, равновесия, здорового питания и заботы о мозге.",es:"Ilustración artística de formas de afrontar el estrés: una mujer contempla símbolos de apoyo social, ejercicio, equilibrio, alimentación saludable y cuidado del cerebro.",en:"Artistic illustration of ways to cope with stress: a woman looks at symbols of social support, exercise, balance, healthy food and brain care.",nl:"Artistieke illustratie van manieren om met stress om te gaan: een vrouw kijkt naar symbolen van sociale steun, beweging, evenwicht, gezonde voeding en zorg voor de hersenen."}[lang]}
+            width={1536}
+            height={1024}
+            loading="lazy"
+            className="mb-7 block h-auto w-full rounded-2xl"
+          />}
           <h4 className="text-sm font-bold uppercase tracking-[.12em] text-[#8f6c2f]">{c.keyIdeas}</h4>
           <ul className="mt-3 space-y-2 leading-7 text-[#526359]">{chapter.points.map((point)=><li key={point} className="flex gap-3"><span className="text-[#b48a39]">•</span><span>{point}</span></li>)}</ul>
           <div className="mt-6 rounded-xl bg-[#f4efe4] p-4"><p className="text-xs font-bold uppercase tracking-[.12em] text-[#8f6c2f]">{c.termsLabel}</p><p className="mt-2 leading-7 text-[#40564b]">{chapter.terms}</p></div>
