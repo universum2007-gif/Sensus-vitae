@@ -8,6 +8,13 @@
       "when": 1788685714315,
       "tag": "0000_brief_omega_sentinel",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1788754294383,
+      "tag": "0001_youthful_bishop",
+      "breakpoints": true
     }
   ]
 }

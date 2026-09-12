@@ -21,7 +21,7 @@ export default async function ClubPage({ params }: { params: Promise<{ lang: str
       <p className="text-xs font-bold tracking-[.18em] text-[#98722e]">SENSUS VITAE</p>
       <h1 className="font-editorial mt-4 text-5xl font-bold">{c.title}</h1>
       <p className="mt-6 text-lg leading-8 text-[#53655c]">{c.intro}</p>
-      <blockquote className="font-editorial mt-9 border-l-2 border-[#b48a39] pl-5 text-2xl italic">“Same questions. Deeper answers.”</blockquote>
+      <blockquote className="font-editorial mt-9 border-l-2 border-[#b48a39] pl-5 text-2xl italic">{{ru:"«Те же вопросы. Глубже ответы.»",es:"«Las mismas preguntas. Respuestas más profundas.»",en:"“Same questions. Deeper answers.”",nl:"“Dezelfde vragen. Diepere antwoorden.”"}[lang]}</blockquote>
     </div>
     <div className="grid gap-4 sm:grid-cols-2">{c.items.map(([title, text], i) => { const Icon = icons[i]; return <article key={title} className="paper-card rounded-[1.4rem] border bg-card p-6"><Icon className="text-[#a17a34]"/><h2 className="font-editorial mt-5 text-xl font-bold">{title}</h2><p className="mt-3 leading-7 text-[#5d6d64]">{text}</p></article>; })}</div>
   </div></main>;

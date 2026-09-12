@@ -37,12 +37,12 @@
 }
 
 * { border-color: var(--border); }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: radial-gradient(circle at 92% 8%, rgba(195,163,95,.12), transparent 26rem), var(--background); color: var(--foreground); font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { margin: 0; overflow-x: hidden; background: radial-gradient(circle at 92% 8%, rgba(195,163,95,.12), transparent 26rem), var(--background); color: var(--foreground); font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
 .home-intro { background: linear-gradient(115deg, rgba(255,253,248,.82), rgba(246,241,231,.38)), radial-gradient(circle at 84% 18%, rgba(195,163,95,.18), transparent 20rem); }
 .font-editorial { font-family: Georgia, "Times New Roman", serif; }
 .gold-rule { background: linear-gradient(90deg, transparent, #b48a39, transparent); height: 1px; }
-.paper-card { box-shadow: 0 12px 42px rgba(35,61,47,.07); }
+.paper-card { min-width: 0; overflow-wrap: anywhere; box-shadow: 0 12px 42px rgba(35,61,47,.07); }
 .article-copy p { margin: 1.1rem 0; line-height: 1.85; color: #344f43; }
 .article-copy h2 { margin: 2.2rem 0 .75rem; font: 700 1.7rem/1.2 Georgia, serif; }
 .article-copy ul { margin: 1rem 0; padding-left: 1.3rem; color: #344f43; }

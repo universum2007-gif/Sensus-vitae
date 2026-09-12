@@ -1,4 +1,10 @@
 import type { Language } from "@/lib/site-content";
+import { chapterOneTranslations } from "./chapter-one-translations";
+import { fullChapterSummaries } from "./full-chapter-summaries";
+import { moreChapterSummaries } from "./more-chapter-summaries";
+import { additionalChapterCards } from "./additional-chapter-cards";
+import { finalChapterSummaries } from "./final-chapter-summaries";
+import { finalChapterCards } from "./final-chapter-cards";
 
 type Chapter = {
   number: number;
@@ -95,3 +101,15 @@ export const sapolskyContent: Record<Language, BookCopy> = {
     ]
   }
 };
+for (const lang of ["es", "en", "nl"] as const) {
+  sapolskyContent[lang].chapters[0].fullText = chapterOneTranslations[lang];
+}
+for (const lang of ["ru", "es", "en", "nl"] as const) {
+  sapolskyContent[lang].chaptersLabel = sapolskyContent[lang].chaptersLabel.replace("1–8", "1–18");
+  sapolskyContent[lang].chapters.push(...additionalChapterCards[lang], ...finalChapterCards[lang]);
+  for (const chapter of sapolskyContent[lang].chapters) {
+    if (fullChapterSummaries[lang][chapter.number]) chapter.fullText = fullChapterSummaries[lang][chapter.number];
+    if (moreChapterSummaries[lang][chapter.number]) chapter.fullText = moreChapterSummaries[lang][chapter.number];
+    if (finalChapterSummaries[lang][chapter.number]) chapter.fullText = finalChapterSummaries[lang][chapter.number];
+  }
+}
