@@ -1,14 +1,6 @@
 import { notFound } from "next/navigation";
-import { and, desc, eq } from "drizzle-orm";
-import { ArticleCard } from "@/components/article-card";
-import Link from "next/link";
-import { ArrowUpRight, BookOpen } from "lucide-react";
-import { isLanguage, staticArticles, ui } from "@/lib/site-content";
-import { getDb } from "@/db";
-import { posts } from "@/db/schema";
 import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
-
-export const dynamic = "force-dynamic";
+import { isLanguage, ui } from "@/lib/site-content";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -19,23 +11,69 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 export default async function LibraryPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLanguage(lang)) notFound();
-  let articles: Array<{ slug: string; category: string; title: string; summary: string; readTime?: string; lang?: string; language?: string }> = staticArticles.filter((a) => a.lang === lang);
-  try {
-    const published = await getDb().select().from(posts).where(and(eq(posts.status, "published"), eq(posts.language, lang))).orderBy(desc(posts.createdAt));
-    articles = [...published.map((p) => ({ ...p, readTime: "" })), ...articles];
-  } catch {}
-  if (!articles.length) articles = staticArticles.filter((a) => a.lang === "ru");
-  const heading = {
-    ru: ["Библиотека знаний", "Конспекты, объяснения и связи между идеями — собранные по мере моего обучения."],
-    es: ["Biblioteca de conocimiento", "Apuntes, explicaciones y conexiones entre ideas, reunidos a medida que avanzo en mis estudios."],
-    en: ["Knowledge library", "Notes, explanations and connections between ideas — collected as I learn."],
-    nl: ["Kennisbibliotheek", "Notities, uitleg en verbanden tussen ideeën — verzameld tijdens mijn studie."],
+
+  const copy = {
+    ru: {
+      title: "Библиотека знаний",
+      intro: "Это структурная страница библиотеки: здесь будет собираться научная и учебная подборка по книгам, статьям, новостям и материалам для обучения.",
+      sections: [
+        ["Книги и материалы", "Источники, книги, тексты и основные чтения, которые помогут строить системное понимание предмета."],
+        ["Научные статьи", "Ключевые исследования, объяснения и ссылки на академические материалы по психологии и смежным областям."],
+        ["Новости и обновления", "Краткие заметки о новых исследованиях, темах и важных идеях в науке."],
+        ["Конспекты", "Сводки, резюме и структурированные заметки для повторения и закрепления знаний."],
+        ["Материалы для обучения", "Пособия, пояснения, рубрики и полезные ресурсы для самостоятельного изучения."],
+      ],
+    },
+    nl: {
+      title: "Bibliotheek",
+      intro: "Dit is een structurele landingspagina voor de bibliotheek: hier worden boeken, artikelen, nieuws en leermaterialen op een overzichtelijke manier verzameld.",
+      sections: [
+        ["Boeken en leesmateriaal", "Bronnen, boeken en teksten die een systematisch begrip van het onderwerp ondersteunen."],
+        ["Wetenschappelijke artikelen", "Belangrijk onderzoek, uitleg en verwijzingen naar academische bronnen in de psychologie en gerelateerde vakgebieden."],
+        ["Nieuws en onderzoeksupdates", "Korte updates over nieuw onderzoek, actuele thema’s en belangrijke wetenschappelijke ideeën."],
+        ["Samenvattingen", "Overzichten, samenvattingen en gestructureerde notities voor herhaling en verdieping."],
+        ["Leermaterialen", "Handleidingen, verklaringen, categorieën en nuttige bronnen voor zelfstudie."],
+      ],
+    },
+    en: {
+      title: "Library",
+      intro: "This is the structural landing page for the library: a place where books, articles, news and learning materials will be collected in one accessible space.",
+      sections: [
+        ["Books and reading materials", "Sources, books and texts that help build a systematic understanding of the subject."],
+        ["Scientific articles", "Key research, explanations and references to academic material in psychology and related fields."],
+        ["News and research updates", "Short updates on new findings, research themes and important scientific ideas."],
+        ["Summaries", "Notes, overviews and structured summaries for revision and deeper learning."],
+        ["Learning resources", "Guides, explanations, categories and useful materials for independent study."],
+      ],
+    },
+    es: {
+      title: "Biblioteca",
+      intro: "Esta es la página de inicio estructural de la biblioteca: aquí se recopilarán libros, artículos, noticias y materiales de aprendizaje en un mismo espacio.",
+      sections: [
+        ["Libros y materiales de lectura", "Fuentes, libros y textos que ayudan a construir una comprensión sistemática del tema."],
+        ["Artículos científicos", "Investigación clave, explicaciones y referencias a material académico en psicología y campos relacionados."],
+        ["Noticias y actualizaciones de investigación", "Actualizaciones breves sobre nuevos hallazgos, temas de investigación e ideas científicas relevantes."],
+        ["Resúmenes", "Apuntes, síntesis y resúmenes estructurados para repasar y profundizar."],
+        ["Recursos de aprendizaje", "Guías, explicaciones, categorías y materiales útiles para el estudio independiente."],
+      ],
+    },
   }[lang];
-  const book = {
-    ru:["Книжный клуб · Роберт Сапольски","Почему у зебр не бывает инфаркта","Полные конспекты глав 1–18: от физиологии стресса, сна и памяти до личности, социальных связей и управления стрессом.","Открыть главы"],
-    es:["Club de lectura · Robert Sapolsky","¿Por qué las cebras no tienen úlcera?","Resúmenes completos de los capítulos 1–18: desde la fisiología del estrés, el sueño y la memoria hasta la personalidad, los vínculos sociales y el afrontamiento.","Abrir capítulos"],
-    en:["Book club · Robert Sapolsky","Why Zebras Don’t Get Ulcers","Full summaries of chapters 1–18: from stress physiology, sleep and memory to personality, social connections and managing stress.","Open chapters"],
-    nl:["Boekenclub · Robert Sapolsky","Waarom krijgen zebra’s geen maagzweren?","Volledige samenvattingen van hoofdstukken 1–18: van stressfysiologie, slaap en geheugen tot persoonlijkheid, sociale banden en omgaan met stress.","Open hoofdstukken"]
-  }[lang];
-  return <main className="mx-auto min-h-[65vh] max-w-6xl px-5 py-14"><p className="text-xs font-bold tracking-[.18em] text-[#98722e]">{ui[lang].eyebrow}</p><h1 className="font-editorial mt-4 text-5xl font-bold">{heading[0]}</h1><p className="mt-5 max-w-2xl text-lg leading-8 text-[#53655c]">{heading[1]}</p><Link href={`/${lang}/sapolsky`} className="paper-card group mt-10 grid gap-6 overflow-hidden rounded-[1.6rem] border bg-[#173d30] p-7 text-[#fffaf0] transition-transform hover:-translate-y-1 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:p-9"><span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#f2d797] text-[#173d30]"><BookOpen size={27}/></span><span><span className="text-xs font-bold uppercase tracking-[.14em] text-[#d9bb78]">{book[0]}</span><span className="font-editorial mt-2 block text-3xl font-bold">{book[1]}</span><span className="mt-3 block max-w-3xl leading-7 text-[#e4ddcf]">{book[2]}</span></span><span className="inline-flex items-center gap-2 text-sm font-bold text-[#f4d896]">{book[3]}<ArrowUpRight size={17}/></span></Link><div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{articles.map((a) => <ArticleCard key={`${a.language ?? a.lang}-${a.slug}`} article={a} lang={lang} />)}</div></main>;
+
+  return (
+    <main className="mx-auto min-h-[65vh] max-w-6xl px-5 py-14">
+      <p className="text-xs font-bold tracking-[.18em] text-[#98722e]">{ui[lang].eyebrow}</p>
+      <h1 className="font-editorial mt-4 text-4xl font-bold sm:text-5xl">{copy.title}</h1>
+      <p className="mt-5 max-w-3xl text-lg leading-8 text-[#53655c]">{copy.intro}</p>
+
+      <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {copy.sections.map(([heading, text]) => (
+          <article key={heading} className="rounded-[1.5rem] border border-[#e5dcc8] bg-[#f9f5ee] p-6 shadow-[0_6px_20px_rgba(23,61,48,0.05)]">
+            <p className="text-xs font-bold uppercase tracking-[.12em] text-[#98722e]">Library</p>
+            <h2 className="mt-4 font-editorial text-2xl font-bold text-[#173d30]">{heading}</h2>
+            <p className="mt-3 text-[15px] leading-7 text-[#53655c]">{text}</p>
+          </article>
+        ))}
+      </div>
+    </main>
+  );
 }
