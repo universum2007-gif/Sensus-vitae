@@ -23,6 +23,12 @@ export const pageMetadataCopy = {
     en: { title: "Knowledge library", description: "Study notes and explanations on psychology, psychobiology, behavioural genetics, statistics and research methods." },
     es: { title: "Biblioteca de conocimiento", description: "Apuntes y explicaciones sobre psicología, psicobiología, genética de la conducta, estadística y métodos de investigación." },
   },
+  study: {
+    ru: { title: "Учебный путь", description: "Структурированный раздел для тем, конспектов, материалов и проверок знаний по психологии и научному мышлению." },
+    nl: { title: "Studieweg", description: "Een gestructureerd onderdeel voor onderwerpen, samenvattingen, studiemateriaal en kennischecks in de psychologie en wetenschappelijk denken." },
+    en: { title: "Study path", description: "A structured section for topics, chapter summaries, study materials and knowledge checks in psychology and scientific thinking." },
+    es: { title: "Ruta de estudio", description: "Una sección estructurada para temas, resúmenes, materiales de estudio y comprobaciones de conocimiento en psicología y pensamiento científico." },
+  },
   club: {
     ru: { title: "Клуб осознанной жизни", description: "Sensus Vitae — пространство для вдумчивого диалога, обсуждения книг и исследования важных вопросов жизни." },
     nl: { title: "Club voor bewust leven", description: "Sensus Vitae is een ruimte voor doordachte dialoog, gesprekken over boeken en onderzoek naar belangrijke levensvragen." },

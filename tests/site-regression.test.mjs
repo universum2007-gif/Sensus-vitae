@@ -12,6 +12,7 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const languages = ["ru", "nl", "en", "es"];
 const publicSections = [
   ["", "home"],
+  ["study", "study"],
   ["library", "library"],
   ["club", "club"],
   ["psychobiology", "psychobiology"],

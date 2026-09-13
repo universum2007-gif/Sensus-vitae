@@ -20,6 +20,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
 
   const navItems = [
     { href: `/${lang}`, label: t.nav.home, active: pathname === `/${lang}` },
+    { href: `/${lang}/study`, label: t.nav.study, active: pathname.startsWith(`/${lang}/study`) },
     { href: `/${lang}/library`, label: t.nav.library, active: pathname.startsWith(`/${lang}/library`) || pathname.startsWith(`/${lang}/articles`) || pathname.startsWith(`/${lang}/sapolsky`) },
     { href: `/${lang}/club`, label: t.nav.club, active: pathname.startsWith(`/${lang}/club`) },
     { href: `/${lang}/about`, label: t.nav.about, active: pathname.startsWith(`/${lang}/about`) },
