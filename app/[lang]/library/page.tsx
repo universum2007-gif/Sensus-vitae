@@ -19,8 +19,8 @@ export default async function LibraryPage({ params }: { params: Promise<{ lang: 
       intro: "Это структурная страница библиотеки: здесь будет собираться научная и учебная подборка по книгам, статьям, новостям и материалам для обучения.",
       sections: [
         { heading: "Книги и материалы", text: "Источники, книги, тексты и основные чтения, которые помогут строить системное понимание предмета.", href: `/${lang}/library/books` },
+        { heading: "Учебные новости", text: "Научные новости, объяснённые для обучения: что произошло, почему это важно и какие понятия стоит запомнить.", href: `/${lang}/library/news` },
         { heading: "Научные статьи", text: "Ключевые исследования, объяснения и ссылки на академические материалы по психологии и смежным областям.", href: null },
-        { heading: "Новости и обновления", text: "Краткие заметки о новых исследованиях, темах и важных идеях в науке.", href: null },
         { heading: "Конспекты", text: "Сводки, резюме и структурированные заметки для повторения и закрепления знаний.", href: null },
         { heading: "Материалы для обучения", text: "Пособия, пояснения, рубрики и полезные ресурсы для самостоятельного изучения.", href: null },
       ],
@@ -30,8 +30,8 @@ export default async function LibraryPage({ params }: { params: Promise<{ lang: 
       intro: "Dit is een structurele landingspagina voor de bibliotheek: hier worden boeken, artikelen, nieuws en leermaterialen op een overzichtelijke manier verzameld.",
       sections: [
         { heading: "Boeken en leesmateriaal", text: "Bronnen, boeken en teksten die een systematisch begrip van het onderwerp ondersteunen.", href: `/${lang}/library/books` },
+        { heading: "Leernieuws", text: "Wetenschappelijke nieuwsitems, uitgelegd voor leren: wat gebeurde, waarom is het belangrijk en welke begrippen zijn relevant.", href: `/${lang}/library/news` },
         { heading: "Wetenschappelijke artikelen", text: "Belangrijk onderzoek, uitleg en verwijzingen naar academische bronnen in de psychologie en gerelateerde vakgebieden.", href: null },
-        { heading: "Nieuws en onderzoeksupdates", text: "Korte updates over nieuw onderzoek, actuele thema’s en belangrijke wetenschappelijke ideeën.", href: null },
         { heading: "Samenvattingen", text: "Overzichten, samenvattingen en gestructureerde notities voor herhaling en verdieping.", href: null },
         { heading: "Leermaterialen", text: "Handleidingen, verklaringen, categorieën en nuttige bronnen voor zelfstudie.", href: null },
       ],
@@ -41,8 +41,8 @@ export default async function LibraryPage({ params }: { params: Promise<{ lang: 
       intro: "This is the structural landing page for the library: a place where books, articles, news and learning materials will be collected in one accessible space.",
       sections: [
         { heading: "Books and reading materials", text: "Sources, books and texts that help build a systematic understanding of the subject.", href: `/${lang}/library/books` },
+        { heading: "Learning News", text: "Scientific updates explained for learning: what happened, why it matters and which concepts are worth remembering.", href: `/${lang}/library/news` },
         { heading: "Scientific articles", text: "Key research, explanations and references to academic material in psychology and related fields.", href: null },
-        { heading: "News and research updates", text: "Short updates on new findings, research themes and important scientific ideas.", href: null },
         { heading: "Summaries", text: "Notes, overviews and structured summaries for revision and deeper learning.", href: null },
         { heading: "Learning resources", text: "Guides, explanations, categories and useful materials for independent study.", href: null },
       ],
@@ -52,8 +52,8 @@ export default async function LibraryPage({ params }: { params: Promise<{ lang: 
       intro: "Esta es la página de inicio estructural de la biblioteca: aquí se recopilarán libros, artículos, noticias y materiales de aprendizaje en un mismo espacio.",
       sections: [
         { heading: "Libros y materiales de lectura", text: "Fuentes, libros y textos que ayudan a construir una comprensión sistemática del tema.", href: `/${lang}/library/books` },
+        { heading: "Noticias para aprender", text: "Actualizaciones científicas explicadas para aprender: qué ocurrió, por qué importa y qué conceptos conviene recordar.", href: `/${lang}/library/news` },
         { heading: "Artículos científicos", text: "Investigación clave, explicaciones y referencias a material académico en psicología y campos relacionados.", href: null },
-        { heading: "Noticias y actualizaciones de investigación", text: "Actualizaciones breves sobre nuevos hallazgos, temas de investigación e ideas científicas relevantes.", href: null },
         { heading: "Resúmenes", text: "Apuntes, síntesis y resúmenes estructurados para repasar y profundizar.", href: null },
         { heading: "Recursos de aprendizaje", text: "Guías, explicaciones, categorías y materiales útiles para el estudio independiente.", href: null },
       ],

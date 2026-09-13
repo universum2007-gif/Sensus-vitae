@@ -42,6 +42,35 @@ function matches(html, pattern) {
   return html.match(pattern) ?? [];
 }
 
+test("library news quiz exposes radio controls and keeps feedback hidden until answered", async () => {
+  const response = await fetchFromWorker("/ru/library/news");
+
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /type=["']radio["']/i, "single-answer quiz should use radio controls");
+  assert.doesNotMatch(html, /aria-live=["']polite["']/i, "feedback should be hidden before the learner answers");
+});
+
+test("library news exposes localized glossary headings and key-term buttons", async () => {
+  const checks = [
+    ["/ru/library/news", "Ключевые термины", ["Аллостатическая нагрузка", "Гипоталамо-гипофизарно-надпочечниковая ось", "Глюкокортикоиды"]],
+    ["/es/library/news", "Términos clave", ["Carga alostática", "Eje hipotálamo-hipófiso-suprarrenal", "Glucocorticoides"]],
+    ["/en/library/news", "Key terms", ["Allostatic load", "HPA axis", "Glucocorticoids"]],
+    ["/nl/library/news", "Kernbegrippen", ["Allostatische belasting", "HPA-as", "Glucocorticoïden"]],
+  ];
+
+  for (const [pathname, heading, terms] of checks) {
+    const response = await fetchFromWorker(pathname);
+    assert.equal(response.status, 200, `${pathname} should resolve`);
+    const html = await response.text();
+    assert.match(html, new RegExp(escapeRegExp(heading)), `${pathname} should show the localized glossary heading`);
+    for (const term of terms) {
+      assert.match(html, new RegExp(escapeRegExp(term)), `${pathname} should include the glossary term ${term}`);
+    }
+  }
+});
+
 test("representative routes preserve language and emit one complete metadata set", async () => {
   const { pageMetadataCopy } = await vite.ssrLoadModule("/lib/metadata.ts");
 
