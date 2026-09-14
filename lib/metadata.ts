@@ -42,7 +42,7 @@ export const pageMetadataCopy = {
     es: { title: "Psicobiología", description: "Cómo el cerebro, el sistema nervioso, la genética, las hormonas, la experiencia y el ambiente contribuyen conjuntamente a la conducta." },
   },
   sapolsky: {
-    ru: { title: "Роберт Сапольски: «Почему у зебр не бывает инфаркта»", description: "Подробные резюме всех 18 глав книги Роберта Сапольски о физиологии, психологии и последствиях стресса." },
+    ru: { title: "Роберт Сапольски: «Почему у зебр не бывает язв»", description: "Подробные резюме всех 18 глав книги Роберта Сапольски о физиологии, психологии и последствиях стресса." },
     nl: { title: "Robert Sapolsky: Waarom krijgen zebra’s geen maagzweren?", description: "Uitgebreide samenvattingen van alle 18 hoofdstukken van Robert Sapolsky’s boek over de fysiologie, psychologie en gevolgen van stress." },
     en: { title: "Robert Sapolsky: Why Zebras Don’t Get Ulcers", description: "Detailed summaries of all 18 chapters of Robert Sapolsky’s book on the physiology, psychology and consequences of stress." },
     es: { title: "Robert Sapolsky: ¿Por qué las cebras no tienen úlcera?", description: "Resúmenes detallados de los 18 capítulos del libro de Robert Sapolsky sobre la fisiología, la psicología y las consecuencias del estrés." },

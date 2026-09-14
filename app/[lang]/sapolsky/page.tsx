@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft, BookOpen, Brain, MessageCircleQuestion } from "lucide-react";
 import { notFound } from "next/navigation";
+import { GlossaryTermButton } from "@/components/glossary-term-button";
+import { type GlossaryTermId } from "@/lib/glossary";
 import { isLanguage } from "@/lib/site-content";
 import { sapolskyContent } from "@/lib/sapolsky-content";
 import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
@@ -12,6 +14,89 @@ const subsectionHeadings = new Set([
   "Что добавляет современная наука", "What current science adds", "Lo que añade la ciencia actual", "Wat de huidige wetenschap toevoegt",
   "Источники к современному уточнению", "Sources for the modern qualification", "Fuentes para la actualización científica", "Bronnen voor de wetenschappelijke actualisering",
 ]);
+
+const sapolskyGuideTerms: Record<"ru" | "es" | "en" | "nl", Record<number, GlossaryTermId[]>> = {
+  ru: {
+    1: ["stress-response", "homeostasis", "allostasis", "allostatic-load"],
+    2: ["autonomic-nervous-system", "sympathetic-nervous-system", "parasympathetic-nervous-system", "hpa-axis", "glucocorticoids"],
+    3: ["hypertension", "atherosclerosis", "inflammation"],
+    4: ["glucocorticoids", "insulin", "insulin-resistance", "glycogen"],
+    5: ["gut-brain-axis", "helicobacter-pylori", "peptic-ulcer", "functional-disorder"],
+    6: ["growth-hormone", "early-life-stress", "psychosocial-dwarfism", "maternal-care", "developmental-programming"],
+    7: ["reproductive-axis", "hpg-axis", "libido", "testosterone", "prolactin"],
+    8: ["psychoneuroimmunology", "inflammation", "immunosuppression", "autoimmunity"],
+    9: ["pain-asymbolia", "nociception", "gate-control", "analgesia", "endogenous-opioids"],
+    10: ["declarative-memory", "procedural-memory", "hippocampus", "neurogenesis"],
+    11: ["slow-wave-sleep", "rem-sleep", "memory-consolidation", "sleep-deprivation", "crh"],
+    12: ["allostatic-load", "glucocorticoid-cascade", "successful-ageing", "hippocampal-feedback"],
+    13: ["predictability", "perceived-control", "social-support", "cognitive-appraisal"],
+    14: ["anhedonia", "learned-helplessness", "monoamine-system", "anterior-cingulate-cortex"],
+    15: ["amygdala", "hostility", "emotional-suppression", "temperament"],
+    16: ["dopamine", "tolerance", "opponent-process", "sensation-seeking", "dependence"],
+    17: ["social-capital", "socioeconomic-status", "subjective-socioeconomic-status", "inequality", "allostatic-load"],
+    18: ["coping", "cognitive-flexibility", "problem-focused-coping", "emotion-focused-coping"],
+  },
+  es: {
+    1: ["stress-response", "homeostasis", "allostasis", "allostatic-load"],
+    2: ["autonomic-nervous-system", "sympathetic-nervous-system", "parasympathetic-nervous-system", "hpa-axis", "glucocorticoids"],
+    3: ["hypertension", "atherosclerosis", "inflammation"],
+    4: ["glucocorticoids", "insulin", "insulin-resistance", "glycogen"],
+    5: ["gut-brain-axis", "helicobacter-pylori", "peptic-ulcer", "functional-disorder"],
+    6: ["growth-hormone", "early-life-stress", "psychosocial-dwarfism", "maternal-care", "developmental-programming"],
+    7: ["reproductive-axis", "hpg-axis", "libido", "testosterone", "prolactin"],
+    8: ["psychoneuroimmunology", "inflammation", "immunosuppression", "autoimmunity"],
+    9: ["pain-asymbolia", "nociception", "gate-control", "analgesia", "endogenous-opioids"],
+    10: ["declarative-memory", "procedural-memory", "hippocampus", "neurogenesis"],
+    11: ["slow-wave-sleep", "rem-sleep", "memory-consolidation", "sleep-deprivation", "crh"],
+    12: ["allostatic-load", "glucocorticoid-cascade", "successful-ageing", "hippocampal-feedback"],
+    13: ["predictability", "perceived-control", "social-support", "cognitive-appraisal"],
+    14: ["anhedonia", "learned-helplessness", "monoamine-system", "anterior-cingulate-cortex"],
+    15: ["amygdala", "hostility", "emotional-suppression", "temperament"],
+    16: ["dopamine", "tolerance", "opponent-process", "sensation-seeking", "dependence"],
+    17: ["social-capital", "socioeconomic-status", "subjective-socioeconomic-status", "inequality", "allostatic-load"],
+    18: ["coping", "cognitive-flexibility", "problem-focused-coping", "emotion-focused-coping"],
+  },
+  en: {
+    1: ["stress-response", "homeostasis", "allostasis", "allostatic-load"],
+    2: ["autonomic-nervous-system", "sympathetic-nervous-system", "parasympathetic-nervous-system", "hpa-axis", "glucocorticoids"],
+    3: ["hypertension", "atherosclerosis", "inflammation"],
+    4: ["glucocorticoids", "insulin", "insulin-resistance", "glycogen"],
+    5: ["gut-brain-axis", "helicobacter-pylori", "peptic-ulcer", "functional-disorder"],
+    6: ["growth-hormone", "early-life-stress", "psychosocial-dwarfism", "maternal-care", "developmental-programming"],
+    7: ["reproductive-axis", "hpg-axis", "libido", "testosterone", "prolactin"],
+    8: ["psychoneuroimmunology", "inflammation", "immunosuppression", "autoimmunity"],
+    9: ["pain-asymbolia", "nociception", "gate-control", "analgesia", "endogenous-opioids"],
+    10: ["declarative-memory", "procedural-memory", "hippocampus", "neurogenesis"],
+    11: ["slow-wave-sleep", "rem-sleep", "memory-consolidation", "sleep-deprivation", "crh"],
+    12: ["allostatic-load", "glucocorticoid-cascade", "successful-ageing", "hippocampal-feedback"],
+    13: ["predictability", "perceived-control", "social-support", "cognitive-appraisal"],
+    14: ["anhedonia", "learned-helplessness", "monoamine-system", "anterior-cingulate-cortex"],
+    15: ["amygdala", "hostility", "emotional-suppression", "temperament"],
+    16: ["dopamine", "tolerance", "opponent-process", "sensation-seeking", "dependence"],
+    17: ["social-capital", "socioeconomic-status", "subjective-socioeconomic-status", "inequality", "allostatic-load"],
+    18: ["coping", "cognitive-flexibility", "problem-focused-coping", "emotion-focused-coping"],
+  },
+  nl: {
+    1: ["stress-response", "homeostasis", "allostasis", "allostatic-load"],
+    2: ["autonomic-nervous-system", "sympathetic-nervous-system", "parasympathetic-nervous-system", "hpa-axis", "glucocorticoids"],
+    3: ["hypertension", "atherosclerosis", "inflammation"],
+    4: ["glucocorticoids", "insulin", "insulin-resistance", "glycogen"],
+    5: ["gut-brain-axis", "helicobacter-pylori", "peptic-ulcer", "functional-disorder"],
+    6: ["growth-hormone", "early-life-stress", "psychosocial-dwarfism", "maternal-care", "developmental-programming"],
+    7: ["reproductive-axis", "hpg-axis", "libido", "testosterone", "prolactin"],
+    8: ["psychoneuroimmunology", "inflammation", "immunosuppression", "autoimmunity"],
+    9: ["pain-asymbolia", "nociception", "gate-control", "analgesia", "endogenous-opioids"],
+    10: ["declarative-memory", "procedural-memory", "hippocampus", "neurogenesis"],
+    11: ["slow-wave-sleep", "rem-sleep", "memory-consolidation", "sleep-deprivation", "crh"],
+    12: ["allostatic-load", "glucocorticoid-cascade", "successful-ageing", "hippocampal-feedback"],
+    13: ["predictability", "perceived-control", "social-support", "cognitive-appraisal"],
+    14: ["anhedonia", "learned-helplessness", "monoamine-system", "anterior-cingulate-cortex"],
+    15: ["amygdala", "hostility", "emotional-suppression", "temperament"],
+    16: ["dopamine", "tolerance", "opponent-process", "sensation-seeking", "dependence"],
+    17: ["social-capital", "socioeconomic-status", "subjective-socioeconomic-status", "inequality", "allostatic-load"],
+    18: ["coping", "cognitive-flexibility", "problem-focused-coping", "emotion-focused-coping"],
+  },
+};
 
 function FullSummary({paragraphs}:{paragraphs:string[]}) {
   const blocks: React.ReactNode[] = [];
@@ -204,7 +289,7 @@ export default async function SapolskyPage({ params }: { params: Promise<{ lang:
           />}
           <h4 className="text-sm font-bold uppercase tracking-[.12em] text-[#8f6c2f]">{c.keyIdeas}</h4>
           <ul className="mt-3 space-y-2 leading-7 text-[#526359]">{chapter.points.map((point)=><li key={point} className="flex gap-3"><span className="text-[#b48a39]">•</span><span>{point}</span></li>)}</ul>
-          <div className="mt-6 rounded-xl bg-[#f4efe4] p-4"><p className="text-xs font-bold uppercase tracking-[.12em] text-[#8f6c2f]">{c.termsLabel}</p><p className="mt-2 leading-7 text-[#40564b]">{chapter.terms}</p></div>
+          <div className="mt-6 rounded-xl bg-[#f4efe4] p-4"><p className="text-xs font-bold uppercase tracking-[.12em] text-[#8f6c2f]">{c.termsLabel}</p><div className="mt-3 flex flex-wrap gap-2">{(sapolskyGuideTerms[lang][chapter.number] ?? []).map((termId) => <GlossaryTermButton key={`${chapter.number}-${termId}`} id={termId} locale={lang} />)}</div></div>
           <div className="mt-4 flex gap-3 rounded-xl border border-[#d9c99f] p-4"><MessageCircleQuestion className="mt-1 shrink-0 text-[#98722e]" size={20}/><div><p className="text-xs font-bold uppercase tracking-[.12em] text-[#8f6c2f]">{c.questionLabel}</p><p className="mt-2 leading-7 text-[#40564b]">{chapter.question}</p></div></div>
           {chapter.fullText && <section className="mt-6 rounded-2xl border border-[#d9c99f] bg-[#fffdf8] p-5 sm:p-7">
             <h4 className="font-editorial text-2xl font-bold text-[#173d30]">{c.fullTextLabel}</h4>
