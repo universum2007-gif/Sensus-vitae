@@ -5,6 +5,12 @@ export type GlossaryTermId =
   | "hpa-axis"
   | "glucocorticoids"
   | "neuroplasticity"
+  | "glia"
+  | "astrocyte"
+  | "oligodendrocyte"
+  | "microglia"
+  | "ependymal-cell"
+  | "myelin"
   | "executive-functions";
 
 export type GlossaryLocaleEntry = {
@@ -114,6 +120,144 @@ export const glossaryTerms: Record<GlossaryTermId, GlossaryTerm> = {
       extendedDefinition: "Plasticiteit ondersteunt aanpassing, maar herhaalde patronen van stress of leren kunnen sommige routes versterken en andere verzwakken.",
     },
   },
+  glia: {
+    id: "glia",
+    ru: {
+      term: "Глия",
+      shortDefinition: "Глия — это поддерживающие клетки нервной системы, которые помогают нейронам питаться, защищаться и работать в правильной химической среде.",
+      extendedDefinition: "Глия не является просто «механической опорой»: она участвует в синапсах, иммунной защите, обмене веществ и поддержании баланса мозга.",
+    },
+    es: {
+      term: "Glía",
+      shortDefinition: "La glía es un conjunto de células de soporte del sistema nervioso que ayudan a las neuronas a alimentarse, protegerse y funcionar en un entorno químico adecuado.",
+      extendedDefinition: "La glía no es solo un soporte mecánico: también participa en las sinapsis, la defensa inmunitaria, el metabolismo y el equilibrio del cerebro.",
+    },
+    en: {
+      term: "Glia",
+      shortDefinition: "Glia are the supporting cells of the nervous system that help neurons receive nutrients, protect themselves and function in the right chemical environment.",
+      extendedDefinition: "Glia are not just structural scaffolding: they participate in synapses, immune defense, metabolism and brain balance.",
+    },
+    nl: {
+      term: "Glia",
+      shortDefinition: "Glia zijn ondersteunende cellen van het zenuwstelsel die neuronen helpen met voeding, bescherming en een geschikte chemische omgeving.",
+      extendedDefinition: "Glia zijn niet alleen een structurele ondersteuning: ze spelen ook een rol bij synapsen, immuunafweer, stofwisseling en het evenwicht van de hersenen.",
+    },
+  },
+  astrocyte: {
+    id: "astrocyte",
+    ru: {
+      term: "Астроцит",
+      shortDefinition: "Астроцит — это звёздчатая глиальная клетка, которая помогает поддерживать химическое равновесие вокруг нейронов и синапсов.",
+      extendedDefinition: "Астроциты помогают регулировать нейротрансмиттеры, ионы и питание, а также участвуют в работе синапсов и восстановлении после повреждений.",
+    },
+    es: {
+      term: "Astrocito",
+      shortDefinition: "Un astrocito es una célula glial estrellada que ayuda a mantener el equilibrio químico alrededor de las neuronas y las sinapsis.",
+      extendedDefinition: "Los astrocitos regulan neurotransmisores, iones y nutrientes, y participan en el funcionamiento de las sinapsis y la recuperación tras lesiones.",
+    },
+    en: {
+      term: "Astrocyte",
+      shortDefinition: "An astrocyte is a star-shaped glial cell that helps maintain the chemical balance around neurons and synapses.",
+      extendedDefinition: "Astrocytes help regulate neurotransmitters, ions and nutrients, and they participate in synaptic function and recovery after injury.",
+    },
+    nl: {
+      term: "Astrocyt",
+      shortDefinition: "Een astrocyt is een stervormige gliacel die helpt bij het handhaven van het chemische evenwicht rond neuronen en synapsen.",
+      extendedDefinition: "Astrocyten helpen bij de regulering van neurotransmitters, ionen en voedingsstoffen en spelen een rol bij synaptische functie en herstel na schade.",
+    },
+  },
+  oligodendrocyte: {
+    id: "oligodendrocyte",
+    ru: {
+      term: "Олигодендроцит",
+      shortDefinition: "Олигодендроцит — это глиальная клетка центральной нервной системы, образующая миелин вокруг аксонов.",
+      extendedDefinition: "Миелин, который создаёт олигодендроцит, ускоряет проведение импульсов и помогает защищать аксоны.",
+    },
+    es: {
+      term: "Oligodendrocito",
+      shortDefinition: "Un oligodendrocito es una célula glial del sistema nervioso central que forma la mielina alrededor de los axones.",
+      extendedDefinition: "La mielina producida por los oligodendrocitos acelera la conducción de impulsos y protege los axones.",
+    },
+    en: {
+      term: "Oligodendrocyte",
+      shortDefinition: "An oligodendrocyte is a glial cell of the central nervous system that forms myelin around axons.",
+      extendedDefinition: "The myelin it produces speeds up signal conduction and helps protect axons.",
+    },
+    nl: {
+      term: "Oligodendrocyt",
+      shortDefinition: "Een oligodendrocyt is een gliacel van het centrale zenuwstelsel die myeline vormt rond axonen.",
+      extendedDefinition: "De myeline die het produceert versnelt het signaaltransport en beschermt axonen.",
+    },
+  },
+  microglia: {
+    id: "microglia",
+    ru: {
+      term: "Микроглия",
+      shortDefinition: "Микроглия — это иммунные клетки мозга, которые следят за повреждениями и удаляют ненужные элементы.",
+      extendedDefinition: "Микроглия помогает поддерживать здоровье нервной ткани и участвует в реакциях на воспаление и повреждение.",
+    },
+    es: {
+      term: "Microglía",
+      shortDefinition: "La microglía es un tipo de célula inmunitaria del cerebro que vigila lesiones y elimina elementos innecesarios.",
+      extendedDefinition: "La microglía ayuda a mantener la salud del tejido nervioso y participa en respuestas inflamatorias y de reparación.",
+    },
+    en: {
+      term: "Microglia",
+      shortDefinition: "Microglia are immune cells of the brain that monitor damage and remove unnecessary material.",
+      extendedDefinition: "Microglia help maintain nervous tissue health and participate in inflammation and repair responses.",
+    },
+    nl: {
+      term: "Microgliacellen",
+      shortDefinition: "Microgliacellen zijn immuuncellen in de hersenen die schade bewaken en ongewenst materiaal verwijderen.",
+      extendedDefinition: "Microgliacellen helpen de gezondheid van zenuwweefsel te behouden en spelen een rol bij ontstekings- en herstelreacties.",
+    },
+  },
+  "ependymal-cell": {
+    id: "ependymal-cell",
+    ru: {
+      term: "Эпендимная клетка",
+      shortDefinition: "Эпендимная клетка выстилает желудочки мозга и помогает поддерживать движение спинномозговой жидкости.",
+      extendedDefinition: "Эти клетки участвуют в циркуляции жидкости и в поддержании внутренней среды мозга.",
+    },
+    es: {
+      term: "Célula ependimaria",
+      shortDefinition: "Una célula ependimaria recubre los ventrículos del cerebro y ayuda a mantener el movimiento del líquido cefalorraquídeo.",
+      extendedDefinition: "Estas células participan en la circulación del líquido y en el mantenimiento del entorno interno del cerebro.",
+    },
+    en: {
+      term: "Ependymal cell",
+      shortDefinition: "An ependymal cell lines the brain’s ventricles and helps sustain the movement of cerebrospinal fluid.",
+      extendedDefinition: "These cells contribute to fluid circulation and help maintain the brain’s internal environment.",
+    },
+    nl: {
+      term: "Ependymcel",
+      shortDefinition: "Een ependymcel bekleedt de ventrikels van de hersenen en helpt het bewegen van cerebrospinale vloeistof te ondersteunen.",
+      extendedDefinition: "Deze cellen dragen bij aan de circulatie van vloeistof en helpen het interne milieu van de hersenen te behouden.",
+    },
+  },
+  myelin: {
+    id: "myelin",
+    ru: {
+      term: "Миелин",
+      shortDefinition: "Миелин — это жирная изолирующая оболочка вокруг некоторых аксонов, которая ускоряет проведение импульсов.",
+      extendedDefinition: "Без миелина сигналы проходят медленнее, а аксоны хуже защищены и поддерживаются.",
+    },
+    es: {
+      term: "Mielina",
+      shortDefinition: "La mielina es una cubierta grasa aislante alrededor de algunos axones que acelera la conducción de impulsos.",
+      extendedDefinition: "Sin mielina, las señales viajan más despacio y los axones quedan peor protegidos y apoyados.",
+    },
+    en: {
+      term: "Myelin",
+      shortDefinition: "Myelin is the fatty insulating sheath around some axons that speeds up signal conduction.",
+      extendedDefinition: "Without myelin, signals travel more slowly and axons are less protected and supported.",
+    },
+    nl: {
+      term: "Myeline",
+      shortDefinition: "Myeline is de vettige isolerende laag rond sommige axonen die de signaalgeleiding versnelt.",
+      extendedDefinition: "Zonder myeline reizen signalen langzamer en zijn axonen minder goed beschermd en ondersteund.",
+    },
+  },
   "executive-functions": {
     id: "executive-functions",
     ru: {
@@ -144,6 +288,12 @@ export const glossarySequence: GlossaryTermId[] = [
   "hpa-axis",
   "glucocorticoids",
   "neuroplasticity",
+  "glia",
+  "astrocyte",
+  "oligodendrocyte",
+  "microglia",
+  "ependymal-cell",
+  "myelin",
   "executive-functions",
 ];
 
