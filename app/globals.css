@@ -2,6 +2,17 @@
 @import "tw-animate-css";
 @import "../vendor/shadcn-tailwind-4.13.0.css";
 
+/* Shared editorial catalogue: navigation is quiet; learning actions are explicit. */
+.sv-ui-link {
+  display: inline-block; min-height: 44px; padding-block: .5rem;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: .25em;
+  transition: color .18s, text-decoration-color .18s;
+}
+.sv-ui-link:hover { color: var(--gold-text); text-decoration-color: currentColor; }
+
 :root {
   --background: #f6f1e7; --foreground: #183a2d; --card: #fffdf8; --card-foreground: #183a2d;
   --popover: #fffdf8; --popover-foreground: #183a2d; --primary: #174f3c; --primary-foreground: #fffdf8;
@@ -48,3 +59,61 @@ body { margin: 0; overflow-x: hidden; background: radial-gradient(circle at 92% 
 .article-copy ul { margin: 1rem 0; padding-left: 1.3rem; color: #344f43; }
 .article-copy li { margin: .6rem 0; line-height: 1.7; }
 ::selection { background: #d8c28c; color: #173d30; }
+
+
+/* Text gold is darker than decorative gold on the cream surfaces. */
+:root { --gold-text: #7a5b25; }
+[class~="text-[#98722e]"]:not(svg):not([aria-hidden="true"]),
+[class~="text-[#8f6c2f]"]:not(svg):not([aria-hidden="true"]) { color: var(--gold-text); }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+  outline: 2px solid #7a5b25;
+  outline-offset: 3px;
+}
+footer a:focus-visible { outline-color: #e4cd96; }
+#main-content { scroll-margin-top: 12rem; }
+.sv-skip-link {
+  position: fixed; top: .5rem; left: .5rem; z-index: 100;
+  padding: .75rem 1rem; border-radius: .5rem;
+  background: #173d30; color: #fffdf8;
+  transform: translateY(-200%);
+}
+.sv-skip-link:focus { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+:root {
+  --catalogue-border: #e5dcc8;
+  --catalogue-radius: 1.5rem;
+  --catalogue-surface: #f9f5ee;
+  --catalogue-shadow: 0 6px 20px rgba(23,61,48,.05);
+  --catalogue-space: 1.5rem;
+}
+.sv-catalogue-card {
+  display: flex; flex-direction: column; height: 100%; min-width: 0;
+  padding: var(--catalogue-space); border: 1px solid var(--catalogue-border);
+  border-radius: var(--catalogue-radius); background: var(--catalogue-surface);
+  box-shadow: var(--catalogue-shadow); overflow-wrap: anywhere;
+}
+.sv-card-link { text-decoration: none; transition: border-color .18s, background-color .18s; }
+.sv-card-link:hover { border-color: #b48a39; background: #fffaf0; }
+.sv-card-action { display: block; border-top: 1px solid var(--catalogue-border); padding-top: 1rem; font-size: .875rem; font-weight: 700; }
+.sv-primary-action {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: .75rem 1.25rem; border-radius: .6rem;
+  background: #174f3c; color: #fffdf8; font-weight: 700; text-decoration: none;
+  transition: background-color .18s;
+}
+.sv-primary-action:hover { background: #123f30; }
+.sv-status { display: inline-block; font-size: .8125rem; line-height: 1.5; color: #53655c; }
+.sv-concept {
+  min-height: 44px; padding: .5rem .25rem; text-align: left;
+  font-size: .875rem; font-weight: 500; color: #173d30; cursor: pointer;
+  text-decoration: underline dotted; text-underline-offset: .3em;
+}
+.sv-concept:hover { color: var(--gold-text); }
+.sv-concept-definition {
+  margin-top: .75rem; width: 100%; padding: 1rem;
+  border-left: 2px solid #c3a35f; background: #fffdf9; text-align: left;
+}
+.sv-quiz-choice:has(input:focus-visible) { outline: 2px solid var(--gold-text); outline-offset: 3px; }
+.sv-quiz-choice input:focus-visible { outline: none; }

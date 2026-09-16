@@ -1,3 +1,4 @@
+import type { GlossaryTermId } from "@/lib/glossary";
 import type { Language } from "@/lib/site-content";
 
 export type EducationalNewsCategoryId =
@@ -17,6 +18,10 @@ export type EducationalNewsQuestion = {
 export type EducationalNewsItem = {
   id: string;
   isDemo: boolean;
+  scientificNewsId?: string;
+  academicLevel?: "introductory" | "intermediate" | "advanced";
+  learningFocus?: ("statistics" | "methodology" | "terminology" | "interpretation" | "limitations")[];
+  glossaryIds?: GlossaryTermId[];
   date: string;
   categoryId: EducationalNewsCategoryId;
   category: Record<Language, string>;
@@ -30,7 +35,7 @@ export type EducationalNewsItem = {
   quiz: EducationalNewsQuestion[];
 };
 
-export const demoKeyTermsByLocale: Record<Language, Array<{ id: string; label: string }>> = {
+export const demoKeyTermsByLocale: Record<Language, Array<{ id: GlossaryTermId; label: string }>> = {
   ru: [
     { id: "allostatic-load", label: "Аллостатическая нагрузка" },
     { id: "hpa-axis", label: "Гипоталамо-гипофизарно-надпочечниковая ось" },

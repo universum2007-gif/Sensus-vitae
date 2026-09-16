@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Compass, Heart, Sparkles, Waypoints } from "lucide-react";
+import { discussionCopy } from "@/lib/discussion-content";
+import { navigationCopy } from "@/lib/learning-navigation";
+import { createPageMetadata } from "@/lib/metadata";
 const languages = ["ru", "es", "en", "nl"] as const;
 type Language = (typeof languages)[number];
 
@@ -31,7 +34,7 @@ const content = {
     noteTitle: "Интерактивная самооценка",
     note:
       "Позже здесь появится научно обоснованный интерактивный инструмент для исследования возможных учебных и профессиональных направлений. Его результаты будут служить ориентиром для размышления, а не диагнозом или окончательным решением.",
-    back: "← Вернуться к учёбе",
+    back: "Вернуться к учёбе",
   },
 
   es: {
@@ -56,7 +59,7 @@ const content = {
     noteTitle: "Autoevaluación interactiva",
     note:
       "Más adelante aparecerá aquí una herramienta interactiva basada en evidencia científica para explorar posibles direcciones académicas y profesionales. Sus resultados servirán como orientación para la reflexión, no como diagnóstico ni decisión definitiva.",
-    back: "← Volver al estudio",
+    back: "Volver al estudio",
   },
 
   en: {
@@ -81,7 +84,7 @@ const content = {
     noteTitle: "Interactive self-assessment",
     note:
       "A scientifically grounded interactive tool for exploring possible academic and professional directions will be added here later. Its results will be used as a guide for reflection, not as a diagnosis or a final decision.",
-    back: "← Back to study",
+    back: "Back to study",
   },
 
   nl: {
@@ -106,11 +109,17 @@ const content = {
     noteTitle: "Interactieve zelfevaluatie",
     note:
       "Later komt hier een wetenschappelijk onderbouwd interactief hulpmiddel om mogelijke studie- en beroepsrichtingen te verkennen. De uitkomsten zijn bedoeld als ondersteuning bij reflectie, niet als diagnose of definitieve beslissing.",
-    back: "← Terug naar studie",
+    back: "Terug naar studie",
   },
 } as const;
 
 const icons = [Heart, Sparkles, Waypoints];
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  return createPageMetadata({ lang, path: "study/orientation", title: navigationCopy[lang].self, description: navigationCopy[lang].selfNote });
+}
 
 export default async function OrientationPage({
   params,
@@ -128,27 +137,31 @@ export default async function OrientationPage({
   return (
     <main className="mx-auto min-h-[65vh] max-w-4xl px-5 py-14">
       <Link
-        href={`/${lang}/study`}
+        href={`/${lang}/club`}
         className="text-sm font-bold text-[#173d30] transition hover:text-[#98722e]"
       >
-        {copy.back}
+        {navigationCopy[lang].club}
       </Link>
 
       <section className="mt-8">
         <div className="flex items-center gap-3 text-[#98722e]">
           <Compass className="h-5 w-5" aria-hidden="true" />
           <p className="text-xs font-bold uppercase tracking-[0.18em]">
-            {copy.label}
+            SENSUS VITAE
           </p>
         </div>
 
         <h1 className="mt-4 font-editorial text-4xl font-bold text-[#173d30] sm:text-5xl">
-          {copy.title}
+          {navigationCopy[lang].self}
         </h1>
 
         <p className="mt-5 max-w-3xl text-[16px] leading-8 text-[#53655c]">
           {copy.intro}
         </p>
+
+        <p className="mt-6 rounded-2xl border bg-[#ece5d7]/55 p-5 leading-7 text-[#53655c]">{navigationCopy[lang].selfNote}</p>
+
+        <p className="mt-6 font-semibold text-[#98722e]">{discussionCopy[lang].self}</p>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {copy.areas.map(([title, description], index) => {

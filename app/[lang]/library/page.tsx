@@ -1,7 +1,10 @@
-import Link from "next/link";
+import { NavigationCard } from "@/components/navigation-card";
+import { destinationAction } from "@/lib/catalogue-actions";
+import { ArticleCard } from "@/components/article-card";
+import { libraryCopy, libraryResourceSlugs, libraryArticleSlugs } from "@/lib/library-architecture";
 import { notFound } from "next/navigation";
 import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
-import { isLanguage, ui } from "@/lib/site-content";
+import { isLanguage, ui, staticArticles } from "@/lib/site-content";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -67,32 +70,13 @@ export default async function LibraryPage({ params }: { params: Promise<{ lang: 
       <p className="mt-5 max-w-3xl text-lg leading-8 text-[#53655c]">{copy.intro}</p>
 
       <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {copy.sections.map(({ heading, text, href }) => {
-          const cardContent = (
-            <>
-              <p className="text-xs font-bold uppercase tracking-[.12em] text-[#98722e]">Library</p>
-              <h2 className="mt-4 font-editorial text-2xl font-bold text-[#173d30]">{heading}</h2>
-              <p className="mt-3 text-[15px] leading-7 text-[#53655c]">{text}</p>
-            </>
-          );
-
-          if (href) {
-            return (
-              <Link key={heading} href={href} className="block rounded-[1.5rem] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#173d30]">
-                <article className="h-full rounded-[1.5rem] border border-[#e5dcc8] bg-[#f9f5ee] p-6 shadow-[0_6px_20px_rgba(23,61,48,0.05)] transition hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(23,61,48,0.08)]">
-                  {cardContent}
-                </article>
-              </Link>
-            );
-          }
-
-          return (
-            <article key={heading} className="rounded-[1.5rem] border border-[#e5dcc8] bg-[#f9f5ee] p-6 shadow-[0_6px_20px_rgba(23,61,48,0.05)]">
-              {cardContent}
-            </article>
-          );
+        {[...copy.sections, { heading: libraryCopy[lang].science, text: libraryCopy[lang].scienceIntro, href: `/${lang}/library/scientific-news` }].map(({ heading, text, href }, index) => {
+          href ??= index === 2 ? `/${lang}/library#scientific-articles` : index === 4 ? `/${lang}/library#learning-materials` : null;
+          if (index === 1) text = libraryCopy[lang].learningIntro;
+          return <NavigationCard key={heading} lang={lang} title={heading} description={text} href={href} status={!href ? "preparing" : index === 1 ? "preview" : undefined} action={href ? destinationAction(href, lang) : undefined}/>;
         })}
       </div>
+      {[{ id: "scientific-articles", title: libraryCopy[lang].articles, slugs: libraryArticleSlugs }, { id: "learning-materials", title: libraryCopy[lang].resources, slugs: libraryResourceSlugs }].map((section) => <section key={section.id} id={section.id} className="mt-12 scroll-mt-8"><h2 className="font-editorial text-3xl font-bold">{section.title}</h2><div className="mt-6 grid gap-5 md:grid-cols-2">{staticArticles.filter((article) => article.lang === lang && section.slugs.includes(article.slug)).map((article) => <ArticleCard key={article.slug} article={article} lang={lang}/>)}</div></section>)}
     </main>
   );
 }

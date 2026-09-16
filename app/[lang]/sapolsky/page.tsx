@@ -1,5 +1,6 @@
+import { SapolskyContextSources, sourceCopy, externalReferenceHeadings } from "@/components/sapolsky-context-sources";
 import Link from "next/link";
-import { ArrowLeft, BookOpen, Brain, MessageCircleQuestion } from "lucide-react";
+import { BookOpen, Brain, MessageCircleQuestion } from "lucide-react";
 import { notFound } from "next/navigation";
 import { GlossaryTermButton } from "@/components/glossary-term-button";
 import { type GlossaryTermId } from "@/lib/glossary";
@@ -98,10 +99,17 @@ const sapolskyGuideTerms: Record<"ru" | "es" | "en" | "nl", Record<number, Gloss
   },
 };
 
+
 function FullSummary({paragraphs}:{paragraphs:string[]}) {
   const blocks: React.ReactNode[] = [];
   for (let i=0;i<paragraphs.length;i++) {
     const paragraph=paragraphs[i];
+    // Keep editorial reference data intact, but omit its bibliography blocks
+    // from the book-summary presentation. All explanatory paragraphs remain.
+    if (externalReferenceHeadings.has(paragraph)) {
+      while (i + 1 < paragraphs.length && paragraphs[i + 1].startsWith("* ") && /https?:\/\//.test(paragraphs[i + 1])) i++;
+      continue;
+    }
     if (paragraph.startsWith("* ")) {
       const items=[];
       while (i<paragraphs.length && paragraphs[i].startsWith("* ")) items.push(paragraphs[i++].slice(2));
@@ -124,10 +132,10 @@ export default async function SapolskyPage({ params }: { params: Promise<{ lang:
   const { lang } = await params;
   if (!isLanguage(lang)) notFound();
   const c = sapolskyContent[lang];
-  const back = { ru:"К библиотеке", es:"Volver a la biblioteca", en:"Back to library", nl:"Naar bibliotheek" }[lang];
+  const back = { ru:"Книги", es:"Libros", en:"Books", nl:"Boeken" }[lang];
 
   return <main className="mx-auto max-w-5xl px-5 py-12">
-    <Link href={`/${lang}/library`} className="inline-flex items-center gap-2 text-sm font-bold"><ArrowLeft size={16}/>{back}</Link>
+    <Link href={`/${lang}/library/books`} className="sv-ui-link inline-flex items-center gap-2 text-sm font-bold">{back}</Link>
     <section className="paper-card relative mt-8 overflow-hidden rounded-[1.8rem] border bg-[#173d30] p-7 text-[#fffaf0] sm:p-12">
       <div className="absolute -right-10 -top-14 select-none text-[13rem] font-black leading-none text-white/[.045]" aria-hidden="true">Z</div>
       <p className="text-xs font-bold tracking-[.17em] text-[#d9bb78]">{c.eyebrow}</p>
@@ -137,13 +145,14 @@ export default async function SapolskyPage({ params }: { params: Promise<{ lang:
 
     <div className="mt-10 flex items-center gap-3"><Brain className="text-[#98722e]"/><h2 className="font-editorial text-3xl font-bold">{c.chaptersLabel}</h2></div>
     <div className="mt-7 space-y-5">
-      {c.chapters.map((chapter) => <details key={chapter.number} className="paper-card group rounded-[1.4rem] border bg-card p-6 open:shadow-[0_18px_50px_rgba(35,61,47,.09)]" open={chapter.number===1}>
-        <summary className="flex cursor-pointer list-none items-start gap-5 [&::-webkit-details-marker]:hidden">
+      {c.chapters.map((chapter) => <details key={chapter.number} className="paper-card group rounded-[1.4rem] border bg-card p-4 sm:p-6 open:shadow-[0_18px_50px_rgba(35,61,47,.09)]" open={chapter.number===1}>
+        <summary className="flex cursor-pointer list-none items-start gap-3 sm:gap-5 [&::-webkit-details-marker]:hidden">
           <span className="font-editorial flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#173d30] text-lg font-bold text-[#f2d797]">{chapter.number}</span>
-          <div className="flex-1"><h3 className="font-editorial text-2xl font-bold leading-tight">{chapter.title}</h3><p className="mt-2 leading-7 text-[#526359]">{chapter.summary}</p></div>
+          <div className="min-w-0 flex-1"><h3 className="font-editorial text-xl font-bold leading-tight sm:text-2xl">{chapter.title}</h3></div>
           <span className="mt-2 text-2xl text-[#98722e] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
         </summary>
         <div className="ml-0 mt-6 border-t pt-6 sm:ml-16">
+          <p className="mb-6 leading-7 text-[#526359]">{chapter.summary}</p>
           {chapter.number === 1 && <img
             src="/sapolsky-chapter-1.png"
             alt={{ru:"Лев преследует зебру в саванне; женщина за ноутбуком размышляет о повседневных заботах.",es:"Un león persigue a una cebra; una mujer ante su portátil piensa en sus preocupaciones cotidianas.",en:"A lion chases a zebra; a woman at her laptop thinks about everyday worries.",nl:"Een leeuw achtervolgt een zebra; een vrouw bij haar laptop denkt aan dagelijkse zorgen."}[lang]}
@@ -291,12 +300,14 @@ export default async function SapolskyPage({ params }: { params: Promise<{ lang:
           <ul className="mt-3 space-y-2 leading-7 text-[#526359]">{chapter.points.map((point)=><li key={point} className="flex gap-3"><span className="text-[#b48a39]">•</span><span>{point}</span></li>)}</ul>
           <div className="mt-6 rounded-xl bg-[#f4efe4] p-4"><p className="text-xs font-bold uppercase tracking-[.12em] text-[#8f6c2f]">{c.termsLabel}</p><div className="mt-3 flex flex-wrap gap-2">{(sapolskyGuideTerms[lang][chapter.number] ?? []).map((termId) => <GlossaryTermButton key={`${chapter.number}-${termId}`} id={termId} locale={lang} />)}</div></div>
           <div className="mt-4 flex gap-3 rounded-xl border border-[#d9c99f] p-4"><MessageCircleQuestion className="mt-1 shrink-0 text-[#98722e]" size={20}/><div><p className="text-xs font-bold uppercase tracking-[.12em] text-[#8f6c2f]">{c.questionLabel}</p><p className="mt-2 leading-7 text-[#40564b]">{chapter.question}</p></div></div>
-          {chapter.fullText && <section className="mt-6 rounded-2xl border border-[#d9c99f] bg-[#fffdf8] p-5 sm:p-7">
+          {chapter.fullText && <section data-chapter-summary className="mt-6 rounded-2xl border border-[#d9c99f] bg-[#fffdf8] p-5 sm:p-7">
             <h4 className="font-editorial text-2xl font-bold text-[#173d30]">{c.fullTextLabel}</h4>
+            <p className="mt-3 text-sm leading-6 text-[#607068]">{sourceCopy[lang].primary}: {lang === "ru" ? "Роберт Сапольски" : "Robert Sapolsky"} — {c.title}, {sourceCopy[lang].chapter} {chapter.number}.</p>
             <div className="mt-5 space-y-5 text-[1.02rem] leading-8 text-[#40564b]">
               <FullSummary paragraphs={chapter.fullText}/>
             </div>
           </section>}
+          {chapter.fullText && <SapolskyContextSources lang={lang} paragraphs={chapter.fullText}/>}
         </div>
       </details>)}
     </div>

@@ -1,6 +1,7 @@
+import { behaviourGlossary } from "@/lib/behaviour-glossary";
 import type { Language } from "@/lib/site-content";
 
-export type GlossaryTermId =
+export type GlossaryTermId = keyof typeof behaviourGlossary
   | "allostatic-load"
   | "hpa-axis"
   | "glucocorticoids"
@@ -99,6 +100,7 @@ export type GlossaryTerm = {
 };
 
 export const glossaryTerms: Record<GlossaryTermId, GlossaryTerm> = {
+  ...behaviourGlossary,
   "allostatic-load": {
     id: "allostatic-load",
     ru: {
@@ -852,6 +854,7 @@ export const glossaryTerms: Record<GlossaryTermId, GlossaryTerm> = {
 };
 
 export const glossarySequence: GlossaryTermId[] = [
+  ...(Object.keys(behaviourGlossary) as GlossaryTermId[]),
   "allostatic-load",
   "hpa-axis",
   "glucocorticoids",

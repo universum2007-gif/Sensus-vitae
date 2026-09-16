@@ -61,8 +61,8 @@ export function EducationalNewsQuiz({
 
                   const rowClasses = [
                     "group flex cursor-pointer items-start gap-3 rounded-xl border px-3 py-3 text-sm text-[#1e443a] transition-colors duration-150",
-                    "focus-within:ring-2 focus-within:ring-[#98722e] focus-within:ring-offset-2",
-                    isSelected ? "border-[#173d30] bg-[#edf4ef] shadow-[inset_0_0_0_1px_#173d30]" : "border-[#e5dcc8] bg-[#f7f1e7]",
+                    "sv-quiz-choice",
+                    isSelected ? "border-[#173d30] bg-[#edf4ef]" : "border-[#e5dcc8] bg-[#f7f1e7]",
                     showOutcome && isCorrectAnswer ? "border-[#1b7f5f] bg-[#eaf8f0]" : "",
                     showOutcome && isSelected && !isCorrectAnswer ? "border-[#9a4b47] bg-[#fdf1f0]" : "",
                   ].join(" ");
@@ -76,7 +76,6 @@ export function EducationalNewsQuiz({
                         checked={isSelected}
                         onChange={() => handleAnswer(questionIndex, choiceIndex)}
                         className="mt-1 h-4 w-4 shrink-0 accent-[#173d30]"
-                        aria-label={`${locale}: ${question.question} ${choiceIndex + 1}`}
                       />
                       <span className="flex-1 leading-6">{choice}</span>
                     </label>

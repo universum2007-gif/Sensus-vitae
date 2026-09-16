@@ -1,9 +1,14 @@
+import { LinkLabel } from "@/components/link-label";
+import { ContentStatus } from "@/components/content-status";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EducationalNewsQuiz } from "@/components/educational-news-quiz";
 import { GlossaryTermButton } from "@/components/glossary-term-button";
 import { createPageMetadata } from "@/lib/metadata";
 import { demoKeyTermsByLocale, educationalNewsCategories, educationalNewsDemoList } from "@/lib/educational-news";
+import { NewsCaseLinks } from "@/components/news-case-links";
+import { libraryCopy } from "@/lib/library-architecture";
+import { navigationCopy } from "@/lib/learning-navigation";
 import { isLanguage } from "@/lib/site-content";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
@@ -97,26 +102,27 @@ export default async function LibraryNewsPage({ params }: { params: Promise<{ la
     },
   }[lang];
 
-  const item = educationalNewsDemoList[0];
   const categoryItems = educationalNewsCategories[lang];
 
   return (
     <main className="mx-auto min-h-[65vh] max-w-6xl px-5 py-14">
       <div className="mb-8">
         <Link href={`/${lang}/library`} className="text-sm font-bold text-[#173d30] hover:text-[#98722e]">
-          ← {copy.back}
+          {copy.back}
         </Link>
       </div>
 
       <p className="text-xs font-bold tracking-[.18em] text-[#98722e]">{copy.news}</p>
       <h1 className="font-editorial mt-4 text-4xl font-bold sm:text-5xl">{copy.title}</h1>
-      <p className="mt-5 max-w-3xl text-lg leading-8 text-[#53655c]">{copy.intro}</p>
+      <p className="mt-5 max-w-3xl text-lg leading-8 text-[#53655c]">{libraryCopy[lang].learningIntro}</p>
+      <p className="mt-4 max-w-3xl leading-7">{libraryCopy[lang].flow}</p>
+      <Link className="sv-ui-link mt-4" href={`/${lang}/library/scientific-news`}><LinkLabel label={libraryCopy[lang].science}/></Link>
 
       <section className="mt-10">
         <p className="text-xs font-bold uppercase tracking-[.12em] text-[#98722e]">{copy.categories}</p>
         <div className="mt-4 flex flex-wrap gap-3">
           {categoryItems.map((category) => (
-            <span key={category.id} className="rounded-full border border-[#d9cfb2] bg-[#f7f1e7] px-3 py-2 text-sm font-medium text-[#173d30]">
+            <span key={category.id} className="border-l border-[#d9cfb2] pl-3 text-sm text-[#53655c]">
               {category.label}
             </span>
           ))}
@@ -124,13 +130,13 @@ export default async function LibraryNewsPage({ params }: { params: Promise<{ la
       </section>
 
       <section className="mt-10 space-y-6">
-        <article className="rounded-[1.5rem] border border-[#e5dcc8] bg-[#f9f5ee] p-6 shadow-[0_6px_20px_rgba(23,61,48,0.05)]">
+        {educationalNewsDemoList.map((item) => <article key={item.id} id={item.id} className="rounded-[1.5rem] border border-[#e5dcc8] bg-[#f9f5ee] p-6 shadow-[0_6px_20px_rgba(23,61,48,0.05)]">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[.16em] text-[#98722e]">{copy.demo}</p>
+              <p className="text-[11px] font-bold uppercase tracking-[.16em] text-[#98722e]"><ContentStatus lang={lang} state={item.isDemo ? "preview" : "available"}/></p>
               <h2 className="mt-2 font-editorial text-3xl font-bold text-[#173d30]">{item.title[lang]}</h2>
             </div>
-            <span className="inline-flex rounded-full border border-[#d9cfb2] bg-[#fffaf1] px-3 py-1 text-xs font-bold uppercase tracking-[.12em] text-[#173d30]">
+            <span className="text-xs font-bold uppercase tracking-[.12em] text-[#53655c]">
               {item.category[lang]}
             </span>
           </div>
@@ -138,26 +144,26 @@ export default async function LibraryNewsPage({ params }: { params: Promise<{ la
           <p className="mt-4 text-sm font-medium text-[#53655c]">{item.date}</p>
           <p className="mt-4 text-[15px] leading-7 text-[#53655c]">{item.summary[lang]}</p>
 
-          <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="mt-6 grid gap-6">
             <div className="rounded-2xl border border-[#e5dcc8] bg-[#fffdf9] p-5">
               <p className="text-xs font-bold uppercase tracking-[.12em] text-[#98722e]">{copy.why}</p>
               <p className="mt-3 text-[15px] leading-7 text-[#53655c]">{item.whyThisMatters[lang]}</p>
             </div>
-            <div className="rounded-2xl border border-[#e5dcc8] bg-[#fffdf9] p-5">
+            {!item.isDemo && <div className="rounded-2xl border border-[#e5dcc8] bg-[#fffdf9] p-5">
               <p className="text-xs font-bold uppercase tracking-[.12em] text-[#98722e]">{copy.source}</p>
               <p className="mt-3 text-[15px] leading-6 text-[#173d30] font-semibold">{item.sourceName}</p>
-              <Link href={item.sourceUrl} className="mt-3 inline-flex text-sm font-bold text-[#173d30] underline decoration-[#b99850] underline-offset-4 hover:text-[#98722e]">
+              <Link href={item.sourceUrl} className="mt-3 inline-flex text-sm font-bold text-[#173d30] sv-ui-link">
                 {copy.openSource}
               </Link>
               {item.doi ? <p className="mt-2 text-xs text-[#53655c]">DOI: {item.doi}</p> : null}
-            </div>
+            </div>}
           </div>
 
           <div className="mt-6 rounded-2xl border border-[#e5dcc8] bg-[#fffdf9] p-5">
-            <p className="text-xs font-bold uppercase tracking-[.12em] text-[#98722e]">{copy.concepts}</p>
+            <p className="text-xs font-bold uppercase tracking-[.12em] text-[#98722e]">{navigationCopy[lang].glossary}</p>
             <div className="mt-3 flex flex-wrap gap-2">
-              {demoKeyTermsByLocale[lang].map((term) => (
-                <GlossaryTermButton key={term.id} id={term.id as any} locale={lang} />
+              {(item.glossaryIds ?? (item.isDemo ? demoKeyTermsByLocale[lang].map((term) => term.id) : [])).map((id) => (
+                <GlossaryTermButton key={id} id={id} locale={lang} />
               ))}
             </div>
           </div>
@@ -180,7 +186,8 @@ export default async function LibraryNewsPage({ params }: { params: Promise<{ la
               }))}
             />
           </div>
-        </article>
+          {!item.isDemo && item.scientificNewsId && <NewsCaseLinks lang={lang} sourceNewsId={item.scientificNewsId}/>}
+        </article>)}
       </section>
     </main>
   );

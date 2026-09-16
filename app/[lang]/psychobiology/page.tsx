@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Brain, Dna } from "lucide-react";
+import { Brain, Dna } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
 import { isLanguage, staticArticles, type Language } from "@/lib/site-content";
 import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
@@ -26,7 +26,7 @@ export default async function PsychobiologyPage({params}:{params:Promise<{lang:s
   const foundation=staticArticles.find((a)=>a.lang===lang&&a.slug==="neuron-and-glia") ?? staticArticles.find((a)=>a.lang==="ru"&&a.slug==="neuron-and-glia")!;
 
   return <main className="mx-auto min-h-[70vh] max-w-6xl px-5 py-12 sm:py-16">
-    <Link href={`/${lang}`} className="inline-flex min-h-11 items-center gap-2 text-sm font-bold"><ArrowLeft size={16}/>{c.back}</Link>
+    <Link href={`/${lang}`} className="inline-flex min-h-11 items-center gap-2 text-sm font-bold">{c.back}</Link>
     <header className="mt-7 grid gap-6 border-b pb-10 lg:grid-cols-[1fr_.38fr] lg:items-end">
       <div><p className="text-xs font-bold tracking-[.18em] text-[#98722e]">{c.eyebrow}</p><h1 className="font-editorial mt-4 text-5xl font-bold sm:text-6xl">{c.title}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-[#53655c]">{c.lead}</p></div>
       <div className="hidden justify-end lg:flex"><span className="grid size-24 place-items-center rounded-full border bg-[#e9ddc3] text-[#174f3c]"><Brain size={42}/></span></div>
