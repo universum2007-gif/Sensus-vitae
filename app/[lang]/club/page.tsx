@@ -134,7 +134,7 @@ export default async function ClubPage({ params }: { params: Promise<{ lang: str
                   <div className="mt-4 rounded-2xl border border-[#d9cfb2] bg-[#f7f1e7] p-3">
                     <p className="text-xs font-bold uppercase tracking-[.12em] text-[#98722e]">{c.projectLabel}</p>
                     <p className="mt-2 font-semibold text-[#173d30]">{c.projectTitle}</p>
-                    <Link href={projectHref} className="mt-3 inline-flex text-sm font-bold text-[#173d30] underline decoration-[#b99850] underline-offset-4 hover:text-[#98722e]">
+                   <Link href={projectHref} className="mt-3 inline-flex rounded-lg border border-[#d9cfb2] bg-[#f1eee6] px-3 py-2 text-sm font-bold text-[#173d30] no-underline transition hover:bg-[#e7e1d3]">
                       {c.openLabel}
                     </Link>
                   </div>
