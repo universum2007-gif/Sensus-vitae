@@ -29,7 +29,14 @@ const terms = table(["English", "Español", "Русский"], [
   ["Skewness", "asimetría", "асимметрия"],
   ["Kurtosis", "curtosis / apuntamiento", "эксцесс (куртозис)"],
 ]);
-const sources = `<ol><li>Suárez Falcón, J. C., Pozo Cabanillas, P., San Luis Costas, C., &amp; Recio Saboya, P. (2019). <em>Introducción al análisis de datos: Aplicaciones en psicología y ciencias de la salud</em>, 2nd ed., Chapter 1, “Conceptos básicos y organización de datos.” ISBN 978-84-17765-42-2. The UNED 2026/27 course guide identifies this as the basic textbook.</li><li>Additional explanations: <a href="https://doi.org/10.1126/science.103.2684.677">Stevens (1946)</a>; <a href="https://openstax.org/books/introductory-statistics-2e/pages/1-3-frequency-frequency-tables-and-levels-of-measurement">OpenStax</a>; <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm">NIST/SEMATECH</a>. These do not replace the assigned chapter.</li></ol>`;
+function sources(lang: ChapterLocale) {
+  const copy = {
+    ru: ["2-е издание, глава 1 «Conceptos básicos y organización de datos»", "Учебная программа UNED 2026/27 указывает его как основной учебник.", "Дополнительные пояснения", "Они не заменяют назначенную главу."],
+    es: ["2.ª edición, capítulo 1 «Conceptos básicos y organización de datos»", "La guía docente de la UNED 2026/27 lo identifica como manual básico.", "Aclaraciones adicionales", "No sustituyen el capítulo asignado."],
+    nl: ["2e druk, hoofdstuk 1 ‘Conceptos básicos y organización de datos’", "De UNED-studiegids 2026/27 noemt dit het basisboek.", "Aanvullende uitleg", "Deze vervangt het opgegeven hoofdstuk niet."],
+  }[lang];
+  return `<ol><li>Suárez Falcón, J. C., Pozo Cabanillas, P., San Luis Costas, C., &amp; Recio Saboya, P. (2019). <em>Introducción al análisis de datos: Aplicaciones en psicología y ciencias de la salud</em>, ${copy[0]}. ISBN 978-84-17765-42-2. ${copy[1]}</li><li>${copy[2]}: <a href="https://doi.org/10.1126/science.103.2684.677">Stevens (1946)</a>; <a href="https://openstax.org/books/introductory-statistics-2e/pages/1-3-frequency-frequency-tables-and-levels-of-measurement">OpenStax</a>; <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm">NIST/SEMATECH</a>. ${copy[3]}</li></ol>`;
+}
 
 export const chapterOneTranslations: Record<ChapterLocale, { title: string; intro: string; subject: string; html: string }> = {
   ru: {
@@ -77,7 +84,7 @@ ${table(["Данные", "График", "На что смотреть"], [
 <p><strong>2.</strong> Балл округлён до двух знаков и записан как 18.56. Каков интервал?</p><details><summary>Решение</summary><p>Единица записи 0.01, половина 0.005. Полуоткрытый интервал [18.555, 18.565).</p></details>
 <p><strong>3.</strong> Какова ширина целочисленного класса 10–12 с поправкой 0.5 по краям?</p><details><summary>Решение</summary><p>Границы 9.5 и 12.5; ширина 12.5 − 9.5 = 3.</p></details>
 <p><strong>4.</strong> Какой процент баллов в таблице не превышает 10?</p><details><summary>Решение</summary><p>25 из 40 находятся в первых двух классах: 25/40 × 100 = 62.5%.</p></details>
-<h2>Термины: английский — испанский — русский</h2>${terms}<h2>Источники и границы конспекта</h2>${sources}`
+<h2>Термины: английский — испанский — русский</h2>${terms}<h2>Источники и границы конспекта</h2>${sources("ru")}`
   },
   es: {
     title: "Introducción al análisis de datos", intro: "Capítulo 1 · Medición, frecuencias y distribuciones", subject: "Análisis de datos",
@@ -124,7 +131,7 @@ ${table(["Datos", "Gráfico", "Precaución"], [
 <p><strong>2.</strong> Una puntuación redondeada a dos decimales aparece como 18.56. ¿Qué intervalo representa?</p><details><summary>Solución</summary><p>La unidad es 0.01, la mitad 0.005; intervalo semiabierto [18.555, 18.565).</p></details>
 <p><strong>3.</strong> ¿Cuál es la amplitud de la clase entera 10–12 con ajuste de 0.5 en los extremos?</p><details><summary>Solución</summary><p>Límites 9.5 y 12.5; amplitud 12.5 − 9.5 = 3.</p></details>
 <p><strong>4.</strong> ¿Qué porcentaje de puntuaciones de la tabla no supera 10?</p><details><summary>Solución</summary><p>Las dos primeras clases contienen 25 de 40: 25/40 × 100 = 62.5%.</p></details>
-<h2>Términos: inglés — español — ruso</h2>${terms}<h2>Fuentes y alcance</h2>${sources}`
+<h2>Términos: inglés — español — ruso</h2>${terms}<h2>Fuentes y alcance</h2>${sources("es")}`
   },
   nl: {
     title: "Inleiding tot data-analyse", intro: "Hoofdstuk 1 · Meting, frequenties en verdelingen", subject: "Data-analyse",
@@ -171,6 +178,6 @@ ${table(["Gegevens", "Grafiek", "Let op"], [
 <p><strong>2.</strong> Een op twee decimalen afgeronde score is 18.56. Welk interval hoort daarbij?</p><details><summary>Oplossing</summary><p>De registratie-eenheid is 0.01, de helft 0.005. Halfopen interval [18.555, 18.565).</p></details>
 <p><strong>3.</strong> Wat is de breedte van de gehele klasse 10–12 met correctie 0.5 aan beide zijden?</p><details><summary>Oplossing</summary><p>Grenzen 9.5 en 12.5; breedte 12.5 − 9.5 = 3.</p></details>
 <p><strong>4.</strong> Welk percentage in de tabel heeft een score van hoogstens 10?</p><details><summary>Oplossing</summary><p>De eerste twee klassen bevatten 25 van 40 scores: 25/40 × 100 = 62.5%.</p></details>
-<h2>Begrippen: Engels — Spaans — Russisch</h2>${terms}<h2>Bronnen en afbakening</h2>${sources}`
+<h2>Begrippen: Engels — Spaans — Russisch</h2>${terms}<h2>Bronnen en afbakening</h2>${sources("nl")}`
   },
 };
