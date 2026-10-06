@@ -7,12 +7,13 @@ const frequencyRows = [
   ["16–20", "15.5–20.5", "18", "4", "0.100", "37", "0.925", "92.5%"],
   ["21–25", "20.5–25.5", "23", "2", "0.050", "39", "0.975", "97.5%"],
   ["26–30", "25.5–30.5", "28", "1", "0.025", "40", "1.000", "100.0%"],
+  ["Total", "—", "—", "40", "1.000", "—", "—", "—"],
 ];
 function table(headers: string[], rows: string[][]) {
   return `<div class="table-wrap"><table><thead><tr>${headers.map(s => `<th>${s}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(s => `<td>${s}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
 }
-function frequencyTable(first: string[]) {
-  return table([...first, "nᵢ", "pᵢ", "nₐ", "pₐ", "Pₐ"], frequencyRows);
+function frequencyTable(first: string[], totalLabel: string) {
+  return table([...first, "nᵢ", "pᵢ", "nₐ", "pₐ", "Pₐ"], frequencyRows.map((row, index) => index === frequencyRows.length - 1 ? [totalLabel, ...row.slice(1)] : row));
 }
 const frequencyFormulas = `<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover><msub><mi>n</mi><mi>i</mi></msub><mo>=</mo><mi>n</mi><mo>;</mo><mspace width="1em"/><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><mfrac><msub><mi>n</mi><mi>i</mi></msub><mi>n</mi></mfrac><mo>;</mo><mspace width="1em"/><msub><mi>P</mi><mi>i</mi></msub><mo>=</mo><mn>100</mn><msub><mi>p</mi><mi>i</mi></msub></mrow></math><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>n</mi><mrow><mi>a</mi><mo>,</mo><mi>i</mi></mrow></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>i</mi></munderover><msub><mi>n</mi><mi>j</mi></msub><mo>;</mo><mspace width="1em"/><msub><mi>p</mi><mrow><mi>a</mi><mo>,</mo><mi>i</mi></mrow></msub><mo>=</mo><mfrac><msub><mi>n</mi><mrow><mi>a</mi><mo>,</mo><mi>i</mi></mrow></msub><mi>n</mi></mfrac><mo>;</mo><mspace width="1em"/><msub><mi>P</mi><mrow><mi>a</mi><mo>,</mo><mi>i</mi></mrow></msub><mo>=</mo><mn>100</mn><msub><mi>p</mi><mrow><mi>a</mi><mo>,</mo><mi>i</mi></mrow></msub></mrow></math>`;
 const boundaryFormulas = `<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>L</mi><mi>E</mi></msub><mo>=</mo><msub><mi>L</mi><mi>A</mi></msub><mo>−</mo><mfrac><mi>u</mi><mn>2</mn></mfrac><mo>;</mo><mspace width="1em"/><msub><mi>U</mi><mi>E</mi></msub><mo>=</mo><msub><mi>U</mi><mi>A</mi></msub><mo>+</mo><mfrac><mi>u</mi><mn>2</mn></mfrac></mrow></math><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>M</mi><mo>=</mo><mfrac><mrow><msub><mi>L</mi><mi>E</mi></msub><mo>+</mo><msub><mi>U</mi><mi>E</mi></msub></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><msub><mi>L</mi><mi>A</mi></msub><mo>+</mo><msub><mi>U</mi><mi>A</mi></msub></mrow><mn>2</mn></mfrac><mo>;</mo><mspace width="1em"/><mi>w</mi><mo>=</mo><msub><mi>U</mi><mi>E</mi></msub><mo>−</mo><msub><mi>L</mi><mi>E</mi></msub></mrow></math>`;
@@ -62,7 +63,7 @@ ${table(["Шкала", "Допустимое сравнение", "Пример"
 <p>Проверки: сумма nᵢ равна n, сумма pᵢ — 1, последний накопленный процент — 100%. Накопление требует содержательного порядка и не подходит к неупорядоченным номинальным категориям (с. 26).</p>
 <h3>Пример: экзаменационная тревожность у 40 студентов</h3>
 <p>Пример 1.1 учебника группирует целочисленные результаты в классы 1–5, 6–10 и следующие. Объединены данные таблиц 1.5 и 1.6 (с. 29–30).</p>
-${frequencyTable(["Класс", "Точные границы", "Середина"])}
+${frequencyTable(["Класс", "Точные границы", "Середина"], "Итого")}
 <p>В первых двух классах 13 + 12 = 25 результатов; накопленная доля 25/40 = 0.625, то есть <strong>62.5%</strong>. Для значения на общей границе нужна единая договорённость, например [0.5, 5.5) и [5.5, 10.5). Записанные целые баллы здесь на границу не попадают.</p>
 <h2>4. Группировка и границы интервалов</h2>
 <p>Глава <strong>не предписывает</strong> k ≈ √n или R = (Xₘₐₓ − Xₘᵢₙ) + u как обязательные формулы выбора числа и ширины классов. Группировать можно по-разному, при этом теряется часть деталей (с. 28). Наблюдаемые значения идут от 2 до 30; интервалы шириной 5 начинаются с 1–5, но 2–6 … 27–31 тоже допустимы (с. 29). Шесть классов здесь пример, а обычный размах наблюдений равен 30 − 2 = 28.</p>
@@ -109,7 +110,7 @@ ${table(["Escala", "Comparación válida", "Ejemplo", "Límite"], [
 <p>Comprobaciones: la suma de nᵢ es n, la de pᵢ es 1 y el último porcentaje acumulado es 100%. La acumulación requiere un orden significativo; no sirve para categorías nominales sin orden (p. 26).</p>
 <h3>Ejemplo: ansiedad ante exámenes en 40 estudiantes</h3>
 <p>El ejemplo 1.1 del manual agrupa las puntuaciones enteras en 1–5, 6–10, etc. Esta tabla reúne los datos de las tablas 1.5 y 1.6 (pp. 29–30).</p>
-${frequencyTable(["Clase", "Límites exactos", "Punto medio"])}
+${frequencyTable(["Clase", "Límites exactos", "Punto medio"], "Total")}
 <p>En las dos primeras clases hay 13 + 12 = 25 puntuaciones: proporción acumulada 25/40 = 0.625, o <strong>62.5%</strong>. Un valor situado exactamente en un límite compartido requiere una convención uniforme, por ejemplo [0.5, 5.5) y [5.5, 10.5). Los valores enteros registrados aquí no caen en esos límites.</p>
 <h2>4. Agrupación y límites de clase</h2>
 <p>El capítulo <strong>no prescribe</strong> k ≈ √n ni R = (Xₘₐₓ − Xₘᵢₙ) + u como fórmulas obligatorias para escoger número y amplitud de clases. Son posibles distintas agrupaciones y al agrupar se pierde detalle (p. 28). Los valores observados van de 2 a 30; las clases de amplitud 5 empiezan en 1–5, aunque 2–6 … 27–31 también servirían (p. 29). Seis clases son un ejemplo, no un resultado obligatorio de la raíz cuadrada. El recorrido observado habitual es 30 − 2 = 28.</p>
@@ -156,7 +157,7 @@ ${table(["Schaal", "Geldige vergelijking", "Voorbeeld", "Beperking"], [
 <p>Controleer: de som van nᵢ is n, van pᵢ is 1 en het laatste cumulatieve percentage 100%. Cumuleren vereist een betekenisvolle volgorde en is niet geschikt voor ongeordende nominale categorieën (p. 26).</p>
 <h3>Voorbeeld: tentamenangst bij 40 studenten</h3>
 <p>Voorbeeld 1.1 van het studieboek groepeert gehele scores in 1–5, 6–10 enzovoort. De tabel combineert tabellen 1.5 en 1.6 (pp. 29–30).</p>
-${frequencyTable(["Klasse", "Werkelijke grenzen", "Midden"])}
+${frequencyTable(["Klasse", "Werkelijke grenzen", "Midden"], "Totaal")}
 <p>De eerste twee klassen bevatten 13 + 12 = 25 scores: cumulatieve proportie 25/40 = 0.625, oftewel <strong>62.5%</strong>. Voor een waarde precies op een gedeelde grens is één consequente afspraak nodig, zoals [0.5, 5.5) en [5.5, 10.5). De geregistreerde gehele scores vallen niet op die grenzen.</p>
 <h2>4. Groeperen en klassengrenzen</h2>
 <p>Het hoofdstuk schrijft <strong>niet</strong> k ≈ √n of R = (Xₘₐₓ − Xₘᵢₙ) + u voor als verplichte regels voor aantal en breedte van klassen. Verschillende indelingen zijn mogelijk en groeperen verliest detail (p. 28). Waarnemingen lopen van 2 tot 30; klassen van breedte 5 beginnen bij 1–5, maar 2–6 … 27–31 kan ook (p. 29). Zes klassen zijn een voorbeeld, geen verplichte uitkomst van een wortelregel. Het gewone waargenomen bereik is 30 − 2 = 28.</p>
