@@ -72,7 +72,7 @@ test("learning destinations preserve localized routes, shared concepts and readi
       const result = await fetchFromWorker(route);
       assert.equal(result.status, 200);
       const body = await result.text();
-      assert.ok(body.includes(navigationCopy[language].books));
+      assert.ok(body.includes(subject.books.length ? ({ru: "Главы", es: "Temas", en: "Chapters", nl: "Hoofdstukken"})[language] : navigationCopy[language].books));
       assert.ok(body.includes(`href="/${language}/glossary"`));
     }
     assert.ok(pages["library/scientific-news"].includes(`href="/${language}/articles/personality-genetics-nature-2026"`));
@@ -487,7 +487,7 @@ test("reader polish preserves sources, answer labels, availability and section o
     assert.equal(activeLinks.length, 2);
     for (const link of activeLinks) assert.ok(link.includes('href="/' + language + '/club"'));
     const study = await (await fetchFromWorker("/" + language + "/study")).text();
-    assert.equal(matches(study, /data-content-status="preparing"/g).length, 6);
+    assert.equal(matches(study, /data-content-status="preparing"/g).length, 5);
     const glossary = await (await fetchFromWorker("/" + language + "/glossary")).text();
     assert.match(glossary, /type="search"/);
     assert.match(glossary, /aria-pressed="true"/);
@@ -518,7 +518,7 @@ test("editorial catalogue uses one destination per card and preserves book readi
         assert.ok(html.includes(catalogueActions[language].chapters));
       }
       if (section === "study") {
-        assert.equal([...html.matchAll(/data-content-status="preparing"/g)].length, 6);
+        assert.equal([...html.matchAll(/data-content-status="preparing"/g)].length, 5);
         assert.ok(html.includes(catalogueActions[language].planned));
       }
     }
@@ -594,4 +594,48 @@ test("new Sapolsky project exposes only reviewed chapter one with localized lear
   }
   for (const other of languages) assert.ok(html.includes('href="/' + other + '/' + testosteroneBookPath + '"'));
  }
+});
+
+
+test("Data Analysis exposes a sourced chapter catalogue and the complete localized study guide", async () => {
+  const { academicSubjects, academicReadingCopy, dataAnalysisChapterOne } = await vite.ssrLoadModule("/lib/academic-content.ts");
+  const subject = academicSubjects.find(item => item.slug === "data-analysis");
+  assert.equal(subject.books.length, 1);
+  assert.deepEqual(subject.books[0].chapters.map(chapter => chapter.number), [1]);
+  for (const lang of languages) {
+    const catalogue = await fetchFromWorker(`/${lang}/study/subjects/data-analysis`);
+    assert.equal(catalogue.status, 200);
+    const catalogueHtml = await catalogue.text();
+    assert.ok(catalogueHtml.includes(academicReadingCopy[lang].source));
+    assert.ok(catalogueHtml.includes(academicReadingCopy[lang].chapters));
+    assert.ok(catalogueHtml.includes("Pozo Cabanillas, M. P."));
+    assert.ok(catalogueHtml.includes(dataAnalysisChapterOne.title[lang].replace(/^[^.]+\.\s*/, "")));
+    assert.ok(catalogueHtml.indexOf(academicReadingCopy[lang].chapters) < catalogueHtml.indexOf(academicReadingCopy[lang].source));
+    assert.ok(catalogueHtml.includes(`href="/${lang}/${dataAnalysisChapterOne.path}"`));
+    const response = await fetchFromWorker(`/${lang}/${dataAnalysisChapterOne.path}`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes(dataAnalysisChapterOne.title[lang]));
+    assert.ok(html.includes(`href="/${lang}/study/subjects/data-analysis"`));
+    for (const target of languages) assert.ok(html.includes(`href="/${target}/${dataAnalysisChapterOne.path}"`));
+    const article = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/)[1];
+    assert.equal(matches(article, /<h2\b/g).length, 10);
+    for (const id of ["statistics", "measurement", "frequencies", "grouping", "graphs", "distribution", "exercises", "terms", "sources"]) {
+      assert.equal(matches(article, new RegExp(`id="${id}"`, "g")).length, 1);
+      assert.ok(article.includes(`href="#${id}"`));
+    }
+    assert.ok(article.indexOf("</blockquote>") < article.indexOf('class="chapter-contents"'));
+    assert.ok(article.indexOf('class="chapter-contents"') < article.indexOf('id="statistics"'));
+    assert.equal(matches(article, /<table\b/g).length, 5);
+    assert.equal(matches(article, /<details\b/g).length, 4);
+    assert.ok(article.includes("62.5%"));
+    assert.match(article, /<math\b/);
+    if (lang === "nl") {
+      const tables = [...article.matchAll(/<table\b[^>]*>([\s\S]*?)<\/table>/g)];
+      const terms = tables.at(-1)[1];
+      assert.equal(matches(terms, /<th>/g).length, 4);
+      assert.equal(matches(terms, /<td>/g).length, 44);
+      for (const term of ["Populatie", "Steekproef", "Populatieparameter", "Steekproefstatistiek", "Absolute frequentie", "Relatieve frequentie", "Cumulatieve frequentie", "Klassengrenzen", "Klassenmidden", "Scheefheid", "Kurtosis"]) assert.ok(terms.includes(`<td>${term}</td>`));
+    }
+  }
 });

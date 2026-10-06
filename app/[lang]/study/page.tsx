@@ -25,7 +25,8 @@ export default async function StudyPage({ params }: { params: Promise<{ lang: st
       <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{year.subjectIndexes.map((index) => {
         const [title, description] = categories[lang][index];
         const subject = academicSubjects.find((item) => item.categoryIndex === index)!;
-        return <NavigationCard key={title} lang={lang} title={title} description={description} href={"/" + lang + "/study/subjects/" + subject.slug} headingLevel={3} status={subject.books.length ? undefined : "preparing"} action={subject.books.length ? catalogueActions[lang].study : catalogueActions[lang].planned}/>;
+        const available = subject.books.some(book => book.chapters.length > 0);
+        return <NavigationCard key={title} lang={lang} title={title} description={description} href={"/" + lang + "/study/subjects/" + subject.slug} headingLevel={3} status={available ? undefined : "preparing"} action={available ? catalogueActions[lang].chapters : catalogueActions[lang].planned}/>;
       })}</div>
     </section>)}
     <aside className="mt-10 rounded-[1.4rem] border bg-[#ece5d7]/55 p-6">
