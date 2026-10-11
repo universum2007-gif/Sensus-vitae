@@ -619,24 +619,21 @@ test("Data Analysis exposes a sourced chapter catalogue and the complete localiz
     assert.ok(html.includes(`href="/${lang}/study/subjects/data-analysis"`));
     for (const target of languages) assert.ok(html.includes(`href="/${target}/${dataAnalysisChapterOne.path}"`));
     const article = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/)[1];
-    assert.equal(matches(article, /<h2\b/g).length, 10);
-    for (const id of ["statistics", "measurement", "frequencies", "grouping", "graphs", "distribution", "exercises", "terms", "sources"]) {
+    assert.equal(matches(article, /<h2\b/g).length, 13);
+    for (const id of ["study-guide", "statistics", "population", "measurement", "data-matrix", "frequencies", "grouping", "graphs", "distribution", "exercises", "summary", "terms"]) {
       assert.equal(matches(article, new RegExp(`id="${id}"`, "g")).length, 1);
       assert.ok(article.includes(`href="#${id}"`));
     }
-    assert.ok(article.indexOf("</blockquote>") < article.indexOf('class="chapter-contents"'));
     assert.ok(article.indexOf('class="chapter-contents"') < article.indexOf('id="statistics"'));
-    assert.equal(matches(article, /<table\b/g).length, 5);
-    assert.equal(matches(article, /<details\b/g).length, 4);
-    assert.ok(article.includes("62.5%"));
+    assert.equal(matches(article, /<table\b/g).length, 15);
+    assert.equal(matches(article, /<details\b/g).length, 26);
+    assert.match(article, /62[.,]5/);
     assert.match(article, /<math\b/);
-    if (lang === "nl") {
-      const tables = [...article.matchAll(/<table\b[^>]*>([\s\S]*?)<\/table>/g)];
-      const terms = tables.at(-1)[1];
-      assert.equal(matches(terms, /<th>/g).length, 4);
-      assert.equal(matches(terms, /<td>/g).length, 44);
-      for (const term of ["Populatie", "Steekproef", "Populatieparameter", "Steekproefstatistiek", "Absolute frequentie", "Relatieve frequentie", "Cumulatieve frequentie", "Klassengrenzen", "Klassenmidden", "Scheefheid", "Kurtosis"]) assert.ok(terms.includes(`<td>${term}</td>`));
-    }
+    assert.equal(matches(article, /<figure\b/g).length, 8);
+    assert.equal(matches(article, /class="exercise"/g).length, 18);
+    const glossary = article.match(/<table class="glossary">([\s\S]*?)<\/table>/)[1];
+    const glossaryBody = glossary.match(/<tbody>([\s\S]*?)<\/tbody>/)[1];
+    assert.equal(matches(glossaryBody, /<tr\b/g).length, 46);
   }
 });
 

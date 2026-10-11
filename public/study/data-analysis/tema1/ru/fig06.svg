@@ -1,0 +1,491 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="720pt" height="504pt" viewBox="0 0 720 504" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-11T13:17:27.003517</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="fig06_figure_1">
+  <g id="fig06_patch_1">
+   <path d="M 0 504 
+L 720 504 
+L 720 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="fig06_axes_1">
+   <g id="fig06_patch_2">
+    <path d="M 56.67 145.130417 
+L 696.2 145.130417 
+L 696.2 41.095 
+L 56.67 41.095 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="fig06_PathCollection_1">
+    <defs>
+     <path id="fig06_m38bf100e85" d="M 0 4.330127 
+C 1.148363 4.330127 2.249847 3.873878 3.061862 3.061862 
+C 3.873878 2.249847 4.330127 1.148363 4.330127 0 
+C 4.330127 -1.148363 3.873878 -2.249847 3.061862 -3.061862 
+C 2.249847 -3.873878 1.148363 -4.330127 0 -4.330127 
+C -1.148363 -4.330127 -2.249847 -3.873878 -3.061862 -3.061862 
+C -3.873878 -2.249847 -4.330127 -1.148363 -4.330127 0 
+C -4.330127 1.148363 -3.873878 2.249847 -3.061862 3.061862 
+C -2.249847 3.873878 -1.148363 4.330127 0 4.330127 
+z
+" style="stroke: #20594e"/>
+    </defs>
+    <g clip-path="url(#fig06_p4de1e74d85)">
+     <use xlink:href="#fig06_m38bf100e85" x="285.073571" y="124.323333" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_2">
+    <g clip-path="url(#fig06_p4de1e74d85)">
+     <use xlink:href="#fig06_m38bf100e85" x="330.754286" y="124.323333" style="fill: #20594e; stroke: #20594e"/>
+     <use xlink:href="#fig06_m38bf100e85" x="330.754286" y="82.709167" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_3">
+    <g clip-path="url(#fig06_p4de1e74d85)">
+     <use xlink:href="#fig06_m38bf100e85" x="376.435" y="124.323333" style="fill: #20594e; stroke: #20594e"/>
+     <use xlink:href="#fig06_m38bf100e85" x="376.435" y="82.709167" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_4">
+    <g clip-path="url(#fig06_p4de1e74d85)">
+     <use xlink:href="#fig06_m38bf100e85" x="422.115714" y="124.323333" style="fill: #20594e; stroke: #20594e"/>
+     <use xlink:href="#fig06_m38bf100e85" x="422.115714" y="82.709167" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_5">
+    <g clip-path="url(#fig06_p4de1e74d85)">
+     <use xlink:href="#fig06_m38bf100e85" x="467.796429" y="124.323333" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_matplotlib.axis_1">
+    <g id="fig06_xtick_1">
+     <g id="fig06_line2d_1">
+      <defs>
+       <path id="fig06_m83e4afcb50" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="102.350714" y="145.130417" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_2">
+     <g id="fig06_line2d_2">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="193.712143" y="145.130417" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_3">
+     <g id="fig06_line2d_3">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="285.073571" y="145.130417" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_4">
+     <g id="fig06_line2d_4">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="376.435" y="145.130417" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_5">
+     <g id="fig06_line2d_5">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="467.796429" y="145.130417" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_6">
+     <g id="fig06_line2d_6">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="559.157857" y="145.130417" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_7">
+     <g id="fig06_line2d_7">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="650.519286" y="145.130417" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g id="fig06_matplotlib.axis_2">
+    <g id="fig06_ytick_1">
+     <g id="fig06_line2d_8">
+      <defs>
+       <path id="fig06_m1ee0c3f667" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#fig06_m1ee0c3f667" x="56.67" y="124.323333" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_1">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="49.67" y="129.64224" transform="rotate(-0 49.67 129.64224)">1</text>
+     </g>
+    </g>
+    <g id="fig06_ytick_2">
+     <g id="fig06_line2d_9">
+      <g>
+       <use xlink:href="#fig06_m1ee0c3f667" x="56.67" y="82.709167" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_2">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="49.67" y="88.028073" transform="rotate(-0 49.67 88.028073)">2</text>
+     </g>
+    </g>
+    <g id="fig06_text_3">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="34.266875" y="93.112708" transform="rotate(-90 34.266875 93.112708)">Число точек</text>
+    </g>
+   </g>
+   <g id="fig06_line2d_10">
+    <path d="M 376.435 145.130417 
+L 376.435 41.095 
+" clip-path="url(#fig06_p4de1e74d85)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #a46724"/>
+   </g>
+   <g id="fig06_patch_3">
+    <path d="M 56.67 145.130417 
+L 56.67 41.095 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="fig06_patch_4">
+    <path d="M 56.67 145.130417 
+L 696.2 145.130417 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="fig06_text_4">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="376.435" y="35.095" transform="rotate(-0 376.435 35.095)">A: центр 6; близкие значения</text>
+   </g>
+  </g>
+  <g id="fig06_axes_2">
+   <g id="fig06_patch_5">
+    <path d="M 56.67 293.760833 
+L 696.2 293.760833 
+L 696.2 189.725417 
+L 56.67 189.725417 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="fig06_PathCollection_6">
+    <g clip-path="url(#fig06_p8ee0a59266)">
+     <use xlink:href="#fig06_m38bf100e85" x="467.796429" y="272.95375" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_7">
+    <g clip-path="url(#fig06_p8ee0a59266)">
+     <use xlink:href="#fig06_m38bf100e85" x="513.477143" y="272.95375" style="fill: #20594e; stroke: #20594e"/>
+     <use xlink:href="#fig06_m38bf100e85" x="513.477143" y="231.339583" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_8">
+    <g clip-path="url(#fig06_p8ee0a59266)">
+     <use xlink:href="#fig06_m38bf100e85" x="559.157857" y="272.95375" style="fill: #20594e; stroke: #20594e"/>
+     <use xlink:href="#fig06_m38bf100e85" x="559.157857" y="231.339583" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_9">
+    <g clip-path="url(#fig06_p8ee0a59266)">
+     <use xlink:href="#fig06_m38bf100e85" x="604.838571" y="272.95375" style="fill: #20594e; stroke: #20594e"/>
+     <use xlink:href="#fig06_m38bf100e85" x="604.838571" y="231.339583" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_10">
+    <g clip-path="url(#fig06_p8ee0a59266)">
+     <use xlink:href="#fig06_m38bf100e85" x="650.519286" y="272.95375" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_matplotlib.axis_3">
+    <g id="fig06_xtick_8">
+     <g id="fig06_line2d_11">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="102.350714" y="293.760833" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_9">
+     <g id="fig06_line2d_12">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="193.712143" y="293.760833" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_10">
+     <g id="fig06_line2d_13">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="285.073571" y="293.760833" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_11">
+     <g id="fig06_line2d_14">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="376.435" y="293.760833" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_12">
+     <g id="fig06_line2d_15">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="467.796429" y="293.760833" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_13">
+     <g id="fig06_line2d_16">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="559.157857" y="293.760833" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="fig06_xtick_14">
+     <g id="fig06_line2d_17">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="650.519286" y="293.760833" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g id="fig06_matplotlib.axis_4">
+    <g id="fig06_ytick_3">
+     <g id="fig06_line2d_18">
+      <g>
+       <use xlink:href="#fig06_m1ee0c3f667" x="56.67" y="272.95375" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_5">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="49.67" y="278.272656" transform="rotate(-0 49.67 278.272656)">1</text>
+     </g>
+    </g>
+    <g id="fig06_ytick_4">
+     <g id="fig06_line2d_19">
+      <g>
+       <use xlink:href="#fig06_m1ee0c3f667" x="56.67" y="231.339583" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_6">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="49.67" y="236.65849" transform="rotate(-0 49.67 236.65849)">2</text>
+     </g>
+    </g>
+    <g id="fig06_text_7">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="34.266875" y="241.743125" transform="rotate(-90 34.266875 241.743125)">Число точек</text>
+    </g>
+   </g>
+   <g id="fig06_line2d_20">
+    <path d="M 559.157857 293.760833 
+L 559.157857 189.725417 
+" clip-path="url(#fig06_p8ee0a59266)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #a46724"/>
+   </g>
+   <g id="fig06_patch_6">
+    <path d="M 56.67 293.760833 
+L 56.67 189.725417 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="fig06_patch_7">
+    <path d="M 56.67 293.760833 
+L 696.2 293.760833 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="fig06_text_8">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="376.435" y="183.725417" transform="rotate(-0 376.435 183.725417)">B: центр 10; разброс как у A</text>
+   </g>
+  </g>
+  <g id="fig06_axes_3">
+   <g id="fig06_patch_8">
+    <path d="M 56.67 442.39125 
+L 696.2 442.39125 
+L 696.2 338.355833 
+L 56.67 338.355833 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="fig06_PathCollection_11">
+    <g clip-path="url(#fig06_pe812e0af40)">
+     <use xlink:href="#fig06_m38bf100e85" x="102.350714" y="421.584167" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_12">
+    <g clip-path="url(#fig06_pe812e0af40)">
+     <use xlink:href="#fig06_m38bf100e85" x="193.712143" y="421.584167" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_13">
+    <g clip-path="url(#fig06_pe812e0af40)">
+     <use xlink:href="#fig06_m38bf100e85" x="285.073571" y="421.584167" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_14">
+    <g clip-path="url(#fig06_pe812e0af40)">
+     <use xlink:href="#fig06_m38bf100e85" x="376.435" y="421.584167" style="fill: #20594e; stroke: #20594e"/>
+     <use xlink:href="#fig06_m38bf100e85" x="376.435" y="379.97" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_15">
+    <g clip-path="url(#fig06_pe812e0af40)">
+     <use xlink:href="#fig06_m38bf100e85" x="467.796429" y="421.584167" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_16">
+    <g clip-path="url(#fig06_pe812e0af40)">
+     <use xlink:href="#fig06_m38bf100e85" x="559.157857" y="421.584167" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_PathCollection_17">
+    <g clip-path="url(#fig06_pe812e0af40)">
+     <use xlink:href="#fig06_m38bf100e85" x="650.519286" y="421.584167" style="fill: #20594e; stroke: #20594e"/>
+    </g>
+   </g>
+   <g id="fig06_matplotlib.axis_5">
+    <g id="fig06_xtick_15">
+     <g id="fig06_line2d_21">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="102.350714" y="442.39125" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_9">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="102.350714" y="460.029062" transform="rotate(-0 102.350714 460.029062)">0</text>
+     </g>
+    </g>
+    <g id="fig06_xtick_16">
+     <g id="fig06_line2d_22">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="193.712143" y="442.39125" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_10">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="193.712143" y="460.029062" transform="rotate(-0 193.712143 460.029062)">2</text>
+     </g>
+    </g>
+    <g id="fig06_xtick_17">
+     <g id="fig06_line2d_23">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="285.073571" y="442.39125" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_11">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="285.073571" y="460.029062" transform="rotate(-0 285.073571 460.029062)">4</text>
+     </g>
+    </g>
+    <g id="fig06_xtick_18">
+     <g id="fig06_line2d_24">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="376.435" y="442.39125" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_12">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="376.435" y="460.029062" transform="rotate(-0 376.435 460.029062)">6</text>
+     </g>
+    </g>
+    <g id="fig06_xtick_19">
+     <g id="fig06_line2d_25">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="467.796429" y="442.39125" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_13">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="467.796429" y="460.029062" transform="rotate(-0 467.796429 460.029062)">8</text>
+     </g>
+    </g>
+    <g id="fig06_xtick_20">
+     <g id="fig06_line2d_26">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="559.157857" y="442.39125" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_14">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="559.157857" y="460.029062" transform="rotate(-0 559.157857 460.029062)">10</text>
+     </g>
+    </g>
+    <g id="fig06_xtick_21">
+     <g id="fig06_line2d_27">
+      <g>
+       <use xlink:href="#fig06_m83e4afcb50" x="650.519286" y="442.39125" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_15">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="650.519286" y="460.029062" transform="rotate(-0 650.519286 460.029062)">12</text>
+     </g>
+    </g>
+    <g id="fig06_text_16">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="376.435" y="476.263125" transform="rotate(-0 376.435 476.263125)">Баллы (общая шкала трёх графиков)</text>
+    </g>
+   </g>
+   <g id="fig06_matplotlib.axis_6">
+    <g id="fig06_ytick_5">
+     <g id="fig06_line2d_28">
+      <g>
+       <use xlink:href="#fig06_m1ee0c3f667" x="56.67" y="421.584167" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_17">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="49.67" y="426.903073" transform="rotate(-0 49.67 426.903073)">1</text>
+     </g>
+    </g>
+    <g id="fig06_ytick_6">
+     <g id="fig06_line2d_29">
+      <g>
+       <use xlink:href="#fig06_m1ee0c3f667" x="56.67" y="379.97" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig06_text_18">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="49.67" y="385.288906" transform="rotate(-0 49.67 385.288906)">2</text>
+     </g>
+    </g>
+    <g id="fig06_text_19">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="34.266875" y="390.373542" transform="rotate(-90 34.266875 390.373542)">Число точек</text>
+    </g>
+   </g>
+   <g id="fig06_line2d_30">
+    <path d="M 376.435 442.39125 
+L 376.435 338.355833 
+" clip-path="url(#fig06_pe812e0af40)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #a46724"/>
+   </g>
+   <g id="fig06_patch_9">
+    <path d="M 56.67 442.39125 
+L 56.67 338.355833 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="fig06_patch_10">
+    <path d="M 56.67 442.39125 
+L 696.2 442.39125 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="fig06_text_20">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="376.435" y="332.355833" transform="rotate(-0 376.435 332.355833)">C: центр 6; разброс больше, чем у A</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="fig06_p4de1e74d85">
+   <rect x="56.67" y="41.095" width="639.53" height="104.035417"/>
+  </clipPath>
+  <clipPath id="fig06_p8ee0a59266">
+   <rect x="56.67" y="189.725417" width="639.53" height="104.035417"/>
+  </clipPath>
+  <clipPath id="fig06_pe812e0af40">
+   <rect x="56.67" y="338.355833" width="639.53" height="104.035417"/>
+  </clipPath>
+ </defs>
+</svg>

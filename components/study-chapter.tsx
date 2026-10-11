@@ -22,12 +22,13 @@ function chapterSections(html: string, sectionIds: readonly string[]) {
   };
 }
 
-export function StudyChapter({ lang, title, subtitle, subject, subjectPath, currentLabel, chaptersLabel, html, sectionIds }: {
+export function StudyChapter({ lang, title, subtitle, subject, subjectPath, currentLabel, chaptersLabel, html, sectionIds, introductorySectionId }: {
   lang: Language; title: string; subtitle: string; subject: string; subjectPath: string;
-  currentLabel: string; chaptersLabel?: string; html: string; sectionIds: readonly string[];
+  currentLabel: string; chaptersLabel?: string; html: string; sectionIds: readonly string[]; introductorySectionId?: string;
 }) {
   const copy = labels[lang];
   const content = chapterSections(html, sectionIds);
+  const numberedSections = content.sections.filter(section => section.id !== introductorySectionId);
   return <main className="mx-auto min-h-[65vh] max-w-6xl px-5 py-8 sm:py-10">
     <nav aria-label={copy.breadcrumb} className="mb-5 text-sm text-[#607068]">
       <ol className="flex flex-wrap items-center gap-x-2">
@@ -46,8 +47,8 @@ export function StudyChapter({ lang, title, subtitle, subject, subjectPath, curr
       <div dangerouslySetInnerHTML={{ __html: content.introduction }}/>
       <nav className="chapter-contents" aria-labelledby="chapter-contents-title">
         <h2 id="chapter-contents-title">{copy.contents}</h2>
-        <ol>{content.sections.map((section, index) => <li key={section.id}>
-          <a href={`#${section.id}`}><span className="chapter-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span>{section.label}</span></a>
+        <ol>{content.sections.map(section => <li key={section.id}>
+          <a href={`#${section.id}`}>{section.id !== introductorySectionId && <span className="chapter-index" aria-hidden="true">{String(numberedSections.indexOf(section) + 1).padStart(2, "0")}</span>}<span>{section.label}</span></a>
         </li>)}</ol>
       </nav>
       <div dangerouslySetInnerHTML={{ __html: content.sections.map(section => section.html).join("") }}/>
