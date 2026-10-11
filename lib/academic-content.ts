@@ -54,8 +54,36 @@ const dataAnalysisBook: AcademicBook = {
   chapters: [dataAnalysisChapterOne],
 };
 
+export const psychobiologyChapterOne = {
+  number: 1,
+  path: "study/subjects/psychobiology/chapter-1",
+  title: {
+    ru: "Глава 1. Психобиология",
+    nl: "Hoofdstuk 1. Psychobiologie",
+    en: "Chapter 1. Psychobiology",
+    es: "Tema 1. La Psicobiología",
+  },
+  description: {
+    ru: "Поведение, эволюция, нервная система, дисциплины и методы психобиологии.",
+    nl: "Gedrag, evolutie, zenuwstelsel, disciplines en methoden van de psychobiologie.",
+    en: "Behavior, evolution, the nervous system, disciplines and methods of psychobiology.",
+    es: "Conducta, evolución, sistema nervioso, disciplinas y métodos de la Psicobiología.",
+  },
+};
+const psychobiologyBook: AcademicBook = {
+  id: "uned-fundamentos-psicobiologia",
+  originalTitle: { text: "Fundamentos de Psicobiología", language: "es" },
+  title: {
+    ru: "Основы психобиологии",
+    nl: "Grondslagen van de psychobiologie",
+    en: "Foundations of Psychobiology",
+    es: "Fundamentos de Psicobiología",
+  },
+  chapters: [psychobiologyChapterOne],
+};
+
 export const academicSubjects: { slug: string; categoryIndex: number; description?: Record<Language, string>; books: AcademicBook[] }[] = [
-  { slug: "psychobiology", categoryIndex: 0, books: [] },
+  { slug: "psychobiology", categoryIndex: 0, books: [psychobiologyBook] },
   { slug: "data-analysis", categoryIndex: 1, books: [dataAnalysisBook], description: {
     ru: "Материалы по предмету «Введение в анализ данных» Grado en Psicología UNED: конспекты глав, основные понятия, формулы, примеры и задачи для самостоятельной проверки.",
     es: "Materiales de la asignatura Introducción al Análisis de Datos del Grado en Psicología de la UNED: resúmenes de capítulos, conceptos fundamentales, fórmulas, ejemplos y ejercicios de autoevaluación.",
@@ -74,3 +102,4 @@ export const dataAnalysisLayoutCopy = {
   en: { chapter: "Chapter", intro: "Summaries, key concepts, formulas, examples and exercises for UNED’s Introduction to Data Analysis course." },
   nl: { chapter: "Hoofdstuk", intro: "Samenvattingen, kernbegrippen, formules, voorbeelden en oefeningen voor het UNED-vak Inleiding tot data-analyse." },
 };
+

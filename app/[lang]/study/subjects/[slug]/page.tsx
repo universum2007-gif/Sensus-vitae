@@ -63,7 +63,7 @@ export default async function SubjectPage({ params }: Params) {
         {book.originalTitle && lang !== book.originalTitle.language && <p className="mt-3 text-sm leading-6 text-[#607068]">{reading.originalTitle}: <span lang={book.originalTitle.language}>{book.originalTitle.text}</span></p>}
         {book.source && <p className="mt-3 text-sm text-[#607068]">{book.source.edition[lang]}.</p>}
       </div>
-      <h2 className="font-editorial mt-8 text-3xl font-bold">{reading.chapters}</h2>
+      <h2 id={book.id === "uned-fundamentos-psicobiologia" ? "chapters" : undefined} className="font-editorial mt-8 text-3xl font-bold">{reading.chapters}</h2>
       <ol className="mt-5 space-y-5">{book.chapters.map(chapter => <li key={chapter.number} className="rounded-2xl border bg-card p-6">
         <h3 className="font-editorial text-2xl font-bold">{chapter.title[lang]}</h3>
         {chapter.description && <p className="mt-3 leading-7 text-[#607068]">{chapter.description[lang]}</p>}
@@ -74,3 +74,4 @@ export default async function SubjectPage({ params }: Params) {
     <div className="mt-6 flex flex-wrap gap-4"><Link className="sv-ui-link font-bold" href={`/${lang}/library#learning-materials`}><LinkLabel label={libraryCopy[lang].resources}/></Link><Link className="sv-ui-link font-bold" href={`/${lang}/glossary`}><LinkLabel label={c.glossary}/></Link></div>
   </SectionShell>;
 }
+

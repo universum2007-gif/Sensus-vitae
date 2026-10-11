@@ -487,7 +487,7 @@ test("reader polish preserves sources, answer labels, availability and section o
     assert.equal(activeLinks.length, 2);
     for (const link of activeLinks) assert.ok(link.includes('href="/' + language + '/club"'));
     const study = await (await fetchFromWorker("/" + language + "/study")).text();
-    assert.equal(matches(study, /data-content-status="preparing"/g).length, 5);
+    assert.equal(matches(study, /data-content-status="preparing"/g).length, 4);
     const glossary = await (await fetchFromWorker("/" + language + "/glossary")).text();
     assert.match(glossary, /type="search"/);
     assert.match(glossary, /aria-pressed="true"/);
@@ -518,7 +518,7 @@ test("editorial catalogue uses one destination per card and preserves book readi
         assert.ok(html.includes(catalogueActions[language].chapters));
       }
       if (section === "study") {
-        assert.equal([...html.matchAll(/data-content-status="preparing"/g)].length, 5);
+        assert.equal([...html.matchAll(/data-content-status="preparing"/g)].length, 4);
         assert.ok(html.includes(catalogueActions[language].planned));
       }
     }
@@ -639,3 +639,22 @@ test("Data Analysis exposes a sourced chapter catalogue and the complete localiz
     }
   }
 });
+
+test("psychobiology chapter and subject links resolve on RU/NL/EN/ES", async () => {
+  for (const language of languages) {
+    const route = `/${language}/study/subjects/psychobiology/chapter-1`;
+    const subject = await fetchFromWorker(`/${language}/study/subjects/psychobiology`);
+    assert.equal(subject.status, 200);
+    assert.ok((await subject.text()).includes(`href="${route}"`));
+    const chapter = await fetchFromWorker(route);
+    assert.equal(chapter.status, 200);
+    const html = await chapter.text();
+    assert.equal((html.match(/<table\b/g) ?? []).length, 12);
+    assert.equal((html.match(/class="table-wrap"/g) ?? []).length, 12);
+    assert.equal((html.match(/<h2 id="(?:subject|history|behavior|disciplines|mechanisms|method|experiments|observation|glossary)"/g) ?? []).length, 9);
+    assert.ok(html.includes('href="https://drive.google.com/file/d/1dXpKE4Ybc8-bN4X1f10GVZig8YAy1sXt/view"'));
+    assert.ok(html.includes(".study-chapter .table-wrap { overflow-x: auto;"));
+    assert.ok(html.includes(`href="/${language}/study/subjects/psychobiology#chapters"`));
+  }
+});
+
