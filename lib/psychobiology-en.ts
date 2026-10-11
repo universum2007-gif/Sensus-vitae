@@ -47,7 +47,7 @@ export const enParagraphs: Record<number, string> = {
   50: "Disciplines are not sealed compartments",
   51: "The chapter stresses that research teams and techniques cross disciplines. A study can combine strategies: a discipline's methodological preferences do not exclude other possibilities.",
   52: "The mind and its biological substrate",
-  53: "Rodolfo Llinás, in his 2003 book The Brain and the Myth of the Self, links the mind to evolution and neural activity. Psychobiology identifies and explains the systems that make mental activity possible.",
+  53: "Rodolfo Llinás, in his 2003 book El cerebro y el mito del yo, links the mind to evolution and neural activity. Psychobiology identifies and explains the systems that make mental activity possible.",
   54: "6 The Scientific Method",
   55: "Chapter reference · pp. 8–10 and Figures 1.6–1.7",
   56: "Psychobiology is an empirical science. It uses the hypothetico-deductive method to formulate explanations and test predictions against data.",
