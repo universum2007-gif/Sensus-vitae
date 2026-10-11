@@ -22,9 +22,9 @@ function chapterSections(html: string, sectionIds: readonly string[]) {
   };
 }
 
-export function StudyChapter({ lang, title, subtitle, subject, subjectPath, currentLabel, html, sectionIds }: {
+export function StudyChapter({ lang, title, subtitle, subject, subjectPath, currentLabel, chaptersLabel, html, sectionIds }: {
   lang: Language; title: string; subtitle: string; subject: string; subjectPath: string;
-  currentLabel: string; html: string; sectionIds: readonly string[];
+  currentLabel: string; chaptersLabel?: string; html: string; sectionIds: readonly string[];
 }) {
   const copy = labels[lang];
   const content = chapterSections(html, sectionIds);
@@ -34,6 +34,7 @@ export function StudyChapter({ lang, title, subtitle, subject, subjectPath, curr
         <li><Link className="sv-ui-link inline-flex min-h-11 items-center" href={`/${lang}/study`}>{copy.study}</Link></li>
         <li aria-hidden="true">/</li>
         <li><Link className="sv-ui-link inline-flex min-h-11 items-center" href={`/${lang}/${subjectPath}`}>{subject}</Link></li>
+        {chaptersLabel && <><li aria-hidden="true">/</li><li><Link className="sv-ui-link inline-flex min-h-11 items-center" href={`/${lang}/${subjectPath}#chapters`}>{chaptersLabel}</Link></li></>}
         <li aria-hidden="true">/</li>
         <li aria-current="page" className="inline-flex min-h-11 items-center">{currentLabel}</li>
       </ol>
@@ -53,3 +54,4 @@ export function StudyChapter({ lang, title, subtitle, subject, subjectPath, curr
     </article>
   </main>;
 }
+
