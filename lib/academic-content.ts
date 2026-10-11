@@ -97,9 +97,9 @@ export const academicSubjects: { slug: string; categoryIndex: number; descriptio
 ];
 
 export const dataAnalysisLayoutCopy = {
-  ru: { chapter: "Глава", intro: "Конспекты, ключевые понятия, формулы, примеры и задачи по курсу Introducción al Análisis de Datos UNED." },
-  es: { chapter: "Tema", intro: "Resúmenes, conceptos clave, fórmulas, ejemplos y ejercicios de la asignatura Introducción al Análisis de Datos de la UNED." },
-  en: { chapter: "Chapter", intro: "Summaries, key concepts, formulas, examples and exercises for UNED’s Introduction to Data Analysis course." },
-  nl: { chapter: "Hoofdstuk", intro: "Samenvattingen, kernbegrippen, formules, voorbeelden en oefeningen voor het UNED-vak Inleiding tot data-analyse." },
+  ru: { subtitle: "Введение в анализ данных · Бакалавриат по психологии · UNED", chapter: "Глава", intro: "Конспекты, ключевые понятия, формулы, примеры и задачи по курсу «Введение в анализ данных» UNED." },
+  es: { subtitle: "Introducción al Análisis de Datos · Grado en Psicología · UNED", chapter: "Tema", intro: "Resúmenes, conceptos clave, fórmulas, ejemplos y ejercicios de la asignatura Introducción al Análisis de Datos de la UNED." },
+  en: { subtitle: "Introduction to Data Analysis · Psychology degree · UNED", chapter: "Chapter", intro: "Summaries, key concepts, formulas, examples and exercises for UNED’s Introduction to Data Analysis course." },
+  nl: { subtitle: "Inleiding tot data-analyse · Bacheloropleiding Psychologie · UNED", chapter: "Hoofdstuk", intro: "Samenvattingen, kernbegrippen, formules, voorbeelden en oefeningen voor het UNED-vak Inleiding tot data-analyse." },
 };
 

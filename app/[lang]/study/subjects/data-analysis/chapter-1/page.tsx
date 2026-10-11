@@ -26,7 +26,7 @@ export default async function ChapterOne({ params }: Params) {
   return <><StudyChapter lang={lang} title={chapter.title} subtitle={layout.subtitle}
     subject={lang === "en" ? "Data Analysis" : chapter.subject} subjectPath="study/subjects/data-analysis"
     chaptersLabel={chapters} currentLabel={layout.current} html={chapter.html}
-    sectionIds={dataAnalysisSectionIds}/>
+    sectionIds={dataAnalysisSectionIds} introductorySectionId="study-guide"/>
     <style>{`
       .study-chapter .tema1-box { border-left: 4px solid #20594e; background: #eaf1eb; padding: 1rem 1.2rem; margin: 1.5rem 0; max-width: 80ch; }
       .study-chapter .tema1-equations { border-left: 4px solid #20594e; background: #eaf1eb; padding: .5rem 1rem; margin: 1.5rem 0; overflow-x: auto; }
