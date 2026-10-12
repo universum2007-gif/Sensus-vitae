@@ -61,7 +61,7 @@ export function GeneticsLesson({lang}:{lang:Language}) {
           {c.stats.map((s,i)=><section key={s.title} className="mt-7"><h3 className="text-xl font-bold leading-7">{s.title}</h3><Paragraphs items={s.paragraphs}/>{i===0?<Formula name="or"/>:i===1?<><Formula name="threshold"/><Formula name="studyThreshold"/></>:<><Formula name="correlation"/><p className="rounded-xl border bg-[#f7f1e7] p-4 font-bold">Internalizing ↔ Substance Use · r<sub>g</sub> = 0.60; SE = 0.02</p></>}</section>)}
         </Section>
         <Section id="biology" number={6} title={c.headings[5]}>
-          {c.biology.map((b,i)=><section className="mt-6" key={b.title}><h3 className="text-xl font-bold">{b.title}</h3><Paragraphs items={b.paragraphs}/><div className="mt-5"><CellFigure kind={i===0?'neuron':'glia'} copy={b} note={c.figureNote}/></div></section>)}
+          {c.biology.map((b,i)=><section className="mt-6" key={b.title}><h3 className="text-xl font-bold">{b.title}</h3><Paragraphs items={b.paragraphs}/><div className="mt-5"><CellFigure locale={lang} kind={i===0?'neuron':'glia'} copy={b} note={c.figureNote}/></div></section>)}
           <aside className="mt-6 rounded-2xl border-l-4 border-[#b48a39] bg-[#f7f1e7] p-5 leading-8">{c.biologyNote}</aside>
         </Section>
         <Section id="life" number={7} title={c.headings[6]}>

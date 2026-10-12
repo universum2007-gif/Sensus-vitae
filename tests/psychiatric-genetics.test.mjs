@@ -83,3 +83,21 @@ test('interaction stays local and styles support small screens and visible focus
   const layout=await readFile(new URL('../components/genetics-lesson.tsx',import.meta.url),'utf8');
   assert.match(layout,/overflow-x-auto/);assert.match(layout,/sm:grid-cols-2/);assert.match(layout,/overflow-wrap: anywhere/);
 });
+
+test('cell diagrams expose independent localized zoom controls and fixed-size HTML markers', async()=>{
+  const zoom=await readFile(new URL('../components/genetics-figure-zoom.tsx',import.meta.url),'utf8');
+  assert.match(zoom,/minWidth: expanded \? '640px'/);
+  assert.match(zoom,/tabIndex=\{expanded \? 0/);
+  assert.match(zoom,/aria-expanded=\{expanded\}/);
+  assert.doesNotMatch(zoom,/fetch\(|localStorage|sessionStorage|sendBeacon/);
+  for(const lang of languages){
+    const html=await(await fetchFromWorker(`/${lang}/${geneticsLessonPath}`)).text();
+    assert.equal((html.match(/data-genetics-figure-zoom/g)??[]).length,2);
+    const controls=[...html.matchAll(/aria-controls="([^"]+)"/g)].map(x=>x[1]);
+    assert.equal(controls.length,2);assert.equal(new Set(controls).size,2);
+    for(const id of controls)assert.ok(html.includes(`id="${id}"`));
+    assert.equal((html.match(/aria-expanded="false"/g)??[]).length,2);
+    assert.equal((html.match(/class="absolute inline-flex size-6/g)??[]).length,8);
+    assert.doesNotMatch(html,/<text\b/,'numbers use HTML rather than shrinking SVG text');
+  }
+});

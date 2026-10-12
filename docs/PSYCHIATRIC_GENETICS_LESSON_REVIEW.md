@@ -34,21 +34,22 @@ Methodological sources additionally linked: Grotzinger et al. (2019), DOI 10.103
 
 Exactly four single-answer questions with three choices each. Key: B, B, C, B. Submit stays disabled until all four are answered; programmatic incomplete submission also produces no result. Submission scores 0–4, locks choices and explains every answer with the correct choice and a link back to the relevant section. Reset clears selections and feedback and restores focus to the first radio. Results receive focus and a status announcement.
 
-Native radio groups/legends, visible focus, text-based correct/incorrect indicators, 44px minimum choice/button targets, responsive cards, local table overflow, scalable SVG, HTML figure labels and expandable glossary definitions. Quiz responses live only in React memory: no network, persistence, tracking or new user data.
+Native radio groups/legends, visible focus, text-based correct/incorrect indicators, 44px minimum choice/button targets, responsive cards, local table overflow, scalable SVG, HTML figure labels and expandable glossary definitions. Mobile cell-diagram markers now use fixed-size HTML badges (14px text, 24px badge), rather than shrinking SVG text. Each diagram has an independent localized enlarge/reduce control; enlarged diagrams are at least 640px wide within a keyboard-focusable horizontal scroll region. Focus moves to the region on enlargement and returns to its button on collapse; labels and alt text remain available. Quiz responses live only in React memory: no network, persistence, tracking or new user data.
 
 ## Isolation and validation
 
-Branch `work/nature-14-disorders-lesson-2026-10-12` starts from PR #2 / v40-equivalent source `52d83bcb1280173e878e14fc2bec66526fe2b5f8`. The draft PR targets that branch, so it contains only the lesson changes. It does not depend on, update, overwrite or merge PR #3 / v41.
+Branch `work/nature-14-disorders-lesson-2026-10-12` starts from PR #2 / v40-equivalent source `52d83bcb1280173e878e14fc2bec66526fe2b5f8`. The original draft PR targets that branch, so it contains only the lesson changes. The mobile-fix working branch starts at PR #5 commit `8c26bdfe82dd21ece5eebb3320fc603e55c1684c`; it does not update PR #5 or PR #3. It does not depend on, update, overwrite or merge PR #3 / v41.
 
 v41 HEAD inspected: `d8f7a8a091a1bd3644ae999c699aa0832d12fa2c`. Its changed-path set and this lesson's changed-path set do not overlap. This establishes file-level separation at that HEAD, not a promise about future changes. No merge operation was performed.
 
 Validation:
 - Production build passed and generated runnable Worker/client artifacts.
-- 30 repository tests passed, including five new lesson tests and existing Data Analysis / Psicobiología runtime regressions.
+- Initial PR #5: 30 repository tests passed, including five lesson tests and existing Data Analysis / Psicobiología runtime regressions. Mobile-fix branch: six lesson tests passed, including localized zoom controls, unique region IDs and fixed-size markers.
 - All four lesson routes returned HTTP 200; invalid language returned 404. Deep language switching, canonical/hreflang, discovery links, four MathML formulas, three accessible SVG illustrations, 12 radio inputs and 15 glossary definitions checked.
 - Every possible four-question answer combination (81 per language) graded correctly; incomplete/invalid attempts rejected.
 - 108 DOM assertions across four languages verified unanswered/partial submission, 0/4, 4/4, 3/4, feedback, choice locking, reset and focus. Run with temporary jsdom tooling; no runtime dependency added.
-- Vector illustrations rendered for static visual inspection.
+- 84 additional DOM assertions across all four languages passed for independent enlargement/collapse, localized labels, min-width, ARIA relationships and focus.
+- Vector illustrations rendered for static visual inspection during initial preparation.
 - General `tsc --noEmit` still reports errors in unchanged Cloudflare runtime typings and `lib/article-translations.ts`; no new lesson file is named in its diagnostics.
 - Browser/device layout, actual screen-reader and real keyboard interaction remain unverified: required browser-control capability unavailable. Responsive and accessibility behavior has structural/DOM verification only; do not call this a full mobile visual sign-off.
 

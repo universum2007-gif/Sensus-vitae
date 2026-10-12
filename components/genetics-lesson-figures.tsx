@@ -1,3 +1,5 @@
+import { GeneticsFigureZoom } from "./genetics-figure-zoom";
+import type { Language } from "@/lib/site-content";
 import type { GeneticsLesson } from '@/lib/psychiatric-genetics/types';
 
 // Original vector schematics. Labels stay in HTML so they remain readable on phones.
@@ -20,8 +22,9 @@ export function GeneticsHero({ alt }: { alt: string }) {
   </svg>;
 }
 
-export function CellFigure({ kind, copy, note }: { kind: 'neuron' | 'glia'; copy: GeneticsLesson['biology'][number]; note: string }) {
+export function CellFigure({ kind, copy, note, locale }: { kind: 'neuron' | 'glia'; copy: GeneticsLesson['biology'][number]; note: string; locale: Language }) {
   return <figure className="rounded-2xl border border-[#e5dcc8] bg-[#f7f1e7] p-4 sm:p-6">
+    <GeneticsFigureZoom locale={locale} title={copy.title}>
     <svg role="img" aria-label={copy.alt} viewBox="0 0 640 300" className="w-full">
       <rect width="640" height="300" fill="#f7f1e7"/>
       {kind === 'neuron' ? <>
@@ -31,18 +34,18 @@ export function CellFigure({ kind, copy, note }: { kind: 'neuron' | 'glia'; copy
         </g>
         <ellipse cx="170" cy="150" rx="40" ry="32" fill="#dce8dc" stroke="#174f3c" strokeWidth="3"/><circle cx="170" cy="150" r="13" fill="#b48a39"/>
         <g fill="#b48a39">{[[605,67],[571,36],[609,127],[609,188],[602,247],[555,264]].map(([x,y])=><circle key={`${x}-${y}`} cx={x} cy={y} r="6"/>)}</g>
-        <Number x={55} y={106} value={1}/><Number x={174} y={207} value={2}/><Number x={357} y={112} value={3}/><Number x={585} y={212} value={4}/>
       </> : <>
         <g stroke="#174f3c" strokeWidth="5" fill="none"><path d="M55 192 H595 M55 260 H595"/><path d="M320 69 C230 100 190 130 148 190 M320 69 C375 120 425 115 492 190 M320 69 C272 130 281 215 281 260"/></g>
         <g fill="#e5d5aa" stroke="#98722e" strokeWidth="2">{[110,225,340,455].map(x=><g key={x}><rect x={x} y="178" width="84" height="28" rx="13"/><rect x={x} y="246" width="84" height="28" rx="13"/></g>)}</g>
         <ellipse cx="320" cy="65" rx="35" ry="26" fill="#dce8dc" stroke="#174f3c" strokeWidth="3"/><circle cx="320" cy="65" r="11" fill="#b48a39"/>
-        <Number x={376} y={58} value={1}/><Number x={73} y={230} value={2}/><Number x={152} y={149} value={3}/><Number x={210} y={220} value={4}/>
       </>}
     </svg>
+    {kind === "neuron" ? <><Number x={55} y={106} value={1}/><Number x={174} y={207} value={2}/><Number x={357} y={112} value={3}/><Number x={585} y={212} value={4}/></> : <><Number x={395} y={35} value={1}/><Number x={73} y={230} value={2}/><Number x={152} y={149} value={3}/><Number x={210} y={220} value={4}/></>}
+    </GeneticsFigureZoom>
     <ol className="mt-3 grid gap-2 text-sm leading-6 sm:grid-cols-2">{copy.labels.map((label,i)=><li key={label} className="flex items-start gap-2"><span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-[#174f3c] text-white">{i+1}</span>{label}</li>)}</ol>
     <figcaption className="mt-4 text-sm text-[#53655c]">{note}</figcaption>
   </figure>;
 }
 function Number({x,y,value}:{x:number;y:number;value:number}) {
-  return <g aria-hidden="true"><circle cx={x} cy={y} r="13" fill="#174f3c"/><text x={x} y={y+5} textAnchor="middle" fill="white" fontSize="15" fontFamily="sans-serif">{value}</text></g>;
+  return <span aria-hidden="true" className="absolute inline-flex size-6 items-center justify-center rounded-full bg-[#174f3c] text-sm font-bold leading-none text-white" style={{ left: `${x / 640 * 100}%`, top: `${y / 300 * 100}%`, transform: "translate(-50%, -50%)" }}>{value}</span>;
 }
