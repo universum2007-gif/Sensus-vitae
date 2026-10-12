@@ -1,3 +1,4 @@
+import { GeneticsLessonCard } from "@/components/genetics-lesson-card";
 import { LinkLabel } from "@/components/link-label";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -17,6 +18,7 @@ export default async function ScientificNewsPage({ params }: { params: Promise<{
   if (!isLanguage(lang)) notFound();
   const c = libraryCopy[lang];
   return <SectionShell lang={lang} title={c.science} intro={c.scienceIntro} parent={{label:ui[lang].nav.library,path:"library"}}>
+    <GeneticsLessonCard lang={lang}/>
     <div className="grid gap-6">{scientificNews.map(item => {
       const article = staticArticles.find(a => a.lang === lang && a.slug === item.articleSlug);
       if (!article) return null;
