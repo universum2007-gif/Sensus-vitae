@@ -72,7 +72,7 @@ test("learning destinations preserve localized routes, shared concepts and readi
       const result = await fetchFromWorker(route);
       assert.equal(result.status, 200);
       const body = await result.text();
-      assert.ok(body.includes(navigationCopy[language].books));
+      assert.ok(body.includes(subject.books.length ? ({ru: "Главы", es: "Temas", en: "Chapters", nl: "Hoofdstukken"})[language] : navigationCopy[language].books));
       assert.ok(body.includes(`href="/${language}/glossary"`));
     }
     assert.ok(pages["library/scientific-news"].includes(`href="/${language}/articles/personality-genetics-nature-2026"`));
@@ -146,32 +146,22 @@ function matches(html, pattern) {
   return html.match(pattern) ?? [];
 }
 
-test("library news quiz exposes radio controls and keeps feedback hidden until answered", async () => {
-  const response = await fetchFromWorker("/ru/library/news");
-
-  assert.equal(response.status, 200);
-  const html = await response.text();
-
-  assert.match(html, /type=["']radio["']/i, "single-answer quiz should use radio controls");
-  assert.doesNotMatch(html, /aria-live=["']polite["']/i, "feedback should be hidden before the learner answers");
-});
-
-test("library news exposes localized glossary headings and key-term buttons", async () => {
+test("library news shows the published lesson without the demo template in every language", async () => {
   const checks = [
-    ["/ru/library/news", "Глоссарий", ["Аллостатическая нагрузка", "Гипоталамо-гипофизарно-надпочечниковая ось", "Глюкокортикоиды"]],
-    ["/es/library/news", "Glosario", ["Carga alostática", "Eje hipotálamo-hipófiso-suprarrenal", "Glucocorticoides"]],
-    ["/en/library/news", "Glossary", ["Allostatic load", "HPA axis", "Glucocorticoids"]],
-    ["/nl/library/news", "Woordenlijst", ["Allostatische belasting", "HPA-as", "Glucocorticoïden"]],
+    ["ru", "Учебные новости"],
+    ["es", "Noticias para aprender"],
+    ["en", "Learning News"],
+    ["nl", "Leernieuws"],
   ];
 
-  for (const [pathname, heading, terms] of checks) {
+  for (const [language, heading] of checks) {
+    const pathname = `/${language}/library/news`;
     const response = await fetchFromWorker(pathname);
     assert.equal(response.status, 200, `${pathname} should resolve`);
     const html = await response.text();
-    assert.match(html, new RegExp(escapeRegExp(heading)), `${pathname} should show the localized glossary heading`);
-    for (const term of terms) {
-      assert.match(html, new RegExp(escapeRegExp(term)), `${pathname} should include the glossary term ${term}`);
-    }
+    assert.match(html, new RegExp(escapeRegExp(heading)), `${pathname} should show its heading`);
+    assert.match(html, new RegExp(`/${language}/library/scientific-news/psychiatric-genetics-14`));
+    assert.doesNotMatch(html, /demo-learning-news-01|2026 · demo|Demo: how stress changes|Демо: как стресс|Demo: cómo el estrés|Demo: hoe stress/i);
   }
 });
 
@@ -468,12 +458,13 @@ test("reader polish preserves sources, answer labels, availability and section o
   for (const language of languages) {
     const news = await (await fetchFromWorker("/" + language + "/library/news")).text();
     assert.doesNotMatch(news, /10\.0000\/demo-news\.none|Demo scientific source placeholder|href="#demo-source"/);
-    assert.match(news, /data-content-status="preview"/);
-    const radios = [...news.matchAll(/<input\b[^>]*type="radio"[^>]*>/g)].map(match => match[0]);
+    assert.doesNotMatch(news, /data-content-status="preview"|demo-learning-news-01/);
+    const lesson = await (await fetchFromWorker("/" + language + "/library/scientific-news/psychiatric-genetics-14")).text();
+    const radios = [...lesson.matchAll(/<input\b[^>]*type="radio"[^>]*>/g)].map(match => match[0]);
     assert.ok(radios.length > 0);
     for (const radio of radios) assert.doesNotMatch(radio, /aria-label=/);
-    assert.match(news, /<fieldset/);
-    assert.match(news, /<legend/);
+    assert.match(lesson, /<fieldset/);
+    assert.match(lesson, /<legend/);
     assert.match(news, /href="#main-content"/);
     assert.match(news, /id="main-content"[^>]*tabIndex="-1"/i);
     const header = news.match(/<header\b[\s\S]*?<\/header>/)[0];
@@ -487,7 +478,7 @@ test("reader polish preserves sources, answer labels, availability and section o
     assert.equal(activeLinks.length, 2);
     for (const link of activeLinks) assert.ok(link.includes('href="/' + language + '/club"'));
     const study = await (await fetchFromWorker("/" + language + "/study")).text();
-    assert.equal(matches(study, /data-content-status="preparing"/g).length, 6);
+    assert.equal(matches(study, /data-content-status="preparing"/g).length, 4);
     const glossary = await (await fetchFromWorker("/" + language + "/glossary")).text();
     assert.match(glossary, /type="search"/);
     assert.match(glossary, /aria-pressed="true"/);
@@ -518,7 +509,7 @@ test("editorial catalogue uses one destination per card and preserves book readi
         assert.ok(html.includes(catalogueActions[language].chapters));
       }
       if (section === "study") {
-        assert.equal([...html.matchAll(/data-content-status="preparing"/g)].length, 6);
+        assert.equal([...html.matchAll(/data-content-status="preparing"/g)].length, 4);
         assert.ok(html.includes(catalogueActions[language].planned));
       }
     }
@@ -595,3 +586,63 @@ test("new Sapolsky project exposes only reviewed chapter one with localized lear
   for (const other of languages) assert.ok(html.includes('href="/' + other + '/' + testosteroneBookPath + '"'));
  }
 });
+
+
+test("Data Analysis exposes a sourced chapter catalogue and the complete localized study guide", async () => {
+  const { academicSubjects, academicReadingCopy, dataAnalysisChapterOne } = await vite.ssrLoadModule("/lib/academic-content.ts");
+  const subject = academicSubjects.find(item => item.slug === "data-analysis");
+  assert.equal(subject.books.length, 1);
+  assert.deepEqual(subject.books[0].chapters.map(chapter => chapter.number), [1]);
+  for (const lang of languages) {
+    const catalogue = await fetchFromWorker(`/${lang}/study/subjects/data-analysis`);
+    assert.equal(catalogue.status, 200);
+    const catalogueHtml = await catalogue.text();
+    assert.ok(catalogueHtml.includes(academicReadingCopy[lang].source));
+    assert.ok(catalogueHtml.includes(academicReadingCopy[lang].chapters));
+    assert.ok(catalogueHtml.includes("Pozo Cabanillas, M. P."));
+    assert.ok(catalogueHtml.includes(dataAnalysisChapterOne.title[lang].replace(/^[^.]+\.\s*/, "")));
+    assert.ok(catalogueHtml.indexOf(academicReadingCopy[lang].chapters) < catalogueHtml.indexOf(academicReadingCopy[lang].source));
+    assert.ok(catalogueHtml.includes(`href="/${lang}/${dataAnalysisChapterOne.path}"`));
+    const response = await fetchFromWorker(`/${lang}/${dataAnalysisChapterOne.path}`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes(dataAnalysisChapterOne.title[lang]));
+    assert.ok(html.includes(`href="/${lang}/study/subjects/data-analysis"`));
+    for (const target of languages) assert.ok(html.includes(`href="/${target}/${dataAnalysisChapterOne.path}"`));
+    const article = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/)[1];
+    assert.equal(matches(article, /<h2\b/g).length, 13);
+    for (const id of ["study-guide", "statistics", "population", "measurement", "data-matrix", "frequencies", "grouping", "graphs", "distribution", "exercises", "summary", "terms"]) {
+      assert.equal(matches(article, new RegExp(`id="${id}"`, "g")).length, 1);
+      assert.ok(article.includes(`href="#${id}"`));
+    }
+    assert.ok(article.indexOf('class="chapter-contents"') < article.indexOf('id="statistics"'));
+    assert.equal(matches(article, /<table\b/g).length, 15);
+    assert.equal(matches(article, /<details\b/g).length, 26);
+    assert.match(article, /62[.,]5/);
+    assert.match(article, /<math\b/);
+    assert.equal(matches(article, /<figure\b/g).length, 8);
+    assert.equal(matches(article, /class="exercise"/g).length, 18);
+    const glossary = article.match(/<table class="glossary">([\s\S]*?)<\/table>/)[1];
+    const glossaryBody = glossary.match(/<tbody>([\s\S]*?)<\/tbody>/)[1];
+    assert.equal(matches(glossaryBody, /<tr\b/g).length, 46);
+  }
+});
+
+test("psychobiology chapter and subject links resolve on RU/NL/EN/ES", async () => {
+  for (const language of languages) {
+    const route = `/${language}/study/subjects/psychobiology/chapter-1`;
+    const subject = await fetchFromWorker(`/${language}/study/subjects/psychobiology`);
+    assert.equal(subject.status, 200);
+    assert.ok((await subject.text()).includes(`href="${route}"`));
+    const chapter = await fetchFromWorker(route);
+    assert.equal(chapter.status, 200);
+    const html = await chapter.text();
+    assert.equal((html.match(/<table\b/g) ?? []).length, 12);
+    assert.equal((html.match(/class="table-wrap"/g) ?? []).length, 12);
+    assert.equal((html.match(/<h2 id="(?:subject|history|behavior|disciplines|mechanisms|method|experiments|observation|glossary)"/g) ?? []).length, 9);
+    assert.ok(html.includes('href="https://drive.google.com/file/d/1dXpKE4Ybc8-bN4X1f10GVZig8YAy1sXt/view"'));
+    assert.ok(html.includes(".study-chapter .table-wrap { overflow-x: auto;"));
+    assert.ok(html.includes(`href="/${language}/study/subjects/psychobiology#chapters"`));
+  }
+});
+

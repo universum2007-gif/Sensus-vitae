@@ -1,0 +1,223 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="720pt" height="338.4pt" viewBox="0 0 720 338.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-11T12:35:43.897149</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="fig05_figure_1">
+  <g id="fig05_patch_1">
+   <path d="M 0 338.4 
+L 720 338.4 
+L 720 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="fig05_axes_1">
+   <g id="fig05_patch_2">
+    <path d="M 70.8 276.24 
+L 696.2 276.24 
+L 696.2 44.56 
+L 70.8 44.56 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="fig05_patch_3">
+    <path d="M 99.227273 276.24 
+L 288.742424 276.24 
+L 288.742424 95.24 
+L 99.227273 95.24 
+z
+" clip-path="url(#fig05_p01958fd980)" style="fill: #20594e; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="fig05_patch_4">
+    <path d="M 288.742424 276.24 
+L 383.5 276.24 
+L 383.5 160.4 
+L 288.742424 160.4 
+z
+" clip-path="url(#fig05_p01958fd980)" style="fill: #20594e; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="fig05_patch_5">
+    <path d="M 383.5 276.24 
+L 667.772727 276.24 
+L 667.772727 242.453333 
+L 383.5 242.453333 
+z
+" clip-path="url(#fig05_p01958fd980)" style="fill: #20594e; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="fig05_matplotlib.axis_1">
+    <g id="fig05_xtick_1">
+     <g id="fig05_line2d_1">
+      <defs>
+       <path id="fig05_mbaf3c52d9a" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#fig05_mbaf3c52d9a" x="99.227273" y="276.24" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_1">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="99.227273" y="293.877813" transform="rotate(-0 99.227273 293.877813)">0,5</text>
+     </g>
+    </g>
+    <g id="fig05_xtick_2">
+     <g id="fig05_line2d_2">
+      <g>
+       <use xlink:href="#fig05_mbaf3c52d9a" x="288.742424" y="276.24" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_2">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="288.742424" y="293.877813" transform="rotate(-0 288.742424 293.877813)">10,5</text>
+     </g>
+    </g>
+    <g id="fig05_xtick_3">
+     <g id="fig05_line2d_3">
+      <g>
+       <use xlink:href="#fig05_mbaf3c52d9a" x="383.5" y="276.24" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_3">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="383.5" y="293.877813" transform="rotate(-0 383.5 293.877813)">15,5</text>
+     </g>
+    </g>
+    <g id="fig05_xtick_4">
+     <g id="fig05_line2d_4">
+      <g>
+       <use xlink:href="#fig05_mbaf3c52d9a" x="667.772727" y="276.24" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_4">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="667.772727" y="293.877813" transform="rotate(-0 667.772727 293.877813)">30,5</text>
+     </g>
+    </g>
+    <g id="fig05_text_5">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="383.5" y="311.427188" transform="rotate(-0 383.5 311.427188)">Puntuación de ansiedad: límites exactos</text>
+    </g>
+   </g>
+   <g id="fig05_matplotlib.axis_2">
+    <g id="fig05_ytick_1">
+     <g id="fig05_line2d_5">
+      <defs>
+       <path id="fig05_m4b639cb764" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#fig05_m4b639cb764" x="70.8" y="276.24" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_6">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="63.8" y="281.558906" transform="rotate(-0 63.8 281.558906)">0</text>
+     </g>
+    </g>
+    <g id="fig05_ytick_2">
+     <g id="fig05_line2d_6">
+      <g>
+       <use xlink:href="#fig05_m4b639cb764" x="70.8" y="240.04" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_7">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="63.8" y="245.358906" transform="rotate(-0 63.8 245.358906)">0,5</text>
+     </g>
+    </g>
+    <g id="fig05_ytick_3">
+     <g id="fig05_line2d_7">
+      <g>
+       <use xlink:href="#fig05_m4b639cb764" x="70.8" y="203.84" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_8">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="63.8" y="209.158906" transform="rotate(-0 63.8 209.158906)">1</text>
+     </g>
+    </g>
+    <g id="fig05_ytick_4">
+     <g id="fig05_line2d_8">
+      <g>
+       <use xlink:href="#fig05_m4b639cb764" x="70.8" y="167.64" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_9">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="63.8" y="172.958906" transform="rotate(-0 63.8 172.958906)">1,5</text>
+     </g>
+    </g>
+    <g id="fig05_ytick_5">
+     <g id="fig05_line2d_9">
+      <g>
+       <use xlink:href="#fig05_m4b639cb764" x="70.8" y="131.44" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_10">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="63.8" y="136.758906" transform="rotate(-0 63.8 136.758906)">2</text>
+     </g>
+    </g>
+    <g id="fig05_ytick_6">
+     <g id="fig05_line2d_10">
+      <g>
+       <use xlink:href="#fig05_m4b639cb764" x="70.8" y="95.24" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_11">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="63.8" y="100.558906" transform="rotate(-0 63.8 100.558906)">2,5</text>
+     </g>
+    </g>
+    <g id="fig05_ytick_7">
+     <g id="fig05_line2d_11">
+      <g>
+       <use xlink:href="#fig05_m4b639cb764" x="70.8" y="59.04" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="fig05_text_12">
+      <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: end" x="63.8" y="64.358906" transform="rotate(-0 63.8 64.358906)">3</text>
+     </g>
+    </g>
+    <g id="fig05_text_13">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="34.624063" y="160.4" transform="rotate(-90 34.624063 160.4)">Densidad de frecuencia (nᵢ / anchura)</text>
+    </g>
+   </g>
+   <g id="fig05_patch_6">
+    <path d="M 70.8 276.24 
+L 70.8 44.56 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="fig05_patch_7">
+    <path d="M 70.8 276.24 
+L 696.2 276.24 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="fig05_text_14">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'" transform="translate(169.074692 72.323063)">nᵢ = 25</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'" transform="translate(143.047817 88)">altura = 2,500</text>
+   </g>
+   <g id="fig05_text_15">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'" transform="translate(315.664806 137.483063)">nᵢ = 8</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'" transform="translate(285.184181 153.16)">altura = 1,600</text>
+   </g>
+   <g id="fig05_text_16">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'" transform="translate(505.179957 219.536396)">nᵢ = 7</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'" transform="translate(474.699332 235.213333)">altura = 0,467</text>
+   </g>
+   <g id="fig05_text_17">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle" x="383.5" y="38.56" transform="rotate(-0 383.5 38.56)">Clases desiguales: el área representa la frecuencia</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="fig05_p01958fd980">
+   <rect x="70.8" y="44.56" width="625.4" height="231.68"/>
+  </clipPath>
+ </defs>
+</svg>
