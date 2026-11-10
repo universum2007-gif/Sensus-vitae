@@ -146,32 +146,22 @@ function matches(html, pattern) {
   return html.match(pattern) ?? [];
 }
 
-test("library news quiz exposes radio controls and keeps feedback hidden until answered", async () => {
-  const response = await fetchFromWorker("/ru/library/news");
-
-  assert.equal(response.status, 200);
-  const html = await response.text();
-
-  assert.match(html, /type=["']radio["']/i, "single-answer quiz should use radio controls");
-  assert.doesNotMatch(html, /aria-live=["']polite["']/i, "feedback should be hidden before the learner answers");
-});
-
-test("library news exposes localized glossary headings and key-term buttons", async () => {
+test("library news shows the published lesson without the demo template in every language", async () => {
   const checks = [
-    ["/ru/library/news", "Глоссарий", ["Аллостатическая нагрузка", "Гипоталамо-гипофизарно-надпочечниковая ось", "Глюкокортикоиды"]],
-    ["/es/library/news", "Glosario", ["Carga alostática", "Eje hipotálamo-hipófiso-suprarrenal", "Glucocorticoides"]],
-    ["/en/library/news", "Glossary", ["Allostatic load", "HPA axis", "Glucocorticoids"]],
-    ["/nl/library/news", "Woordenlijst", ["Allostatische belasting", "HPA-as", "Glucocorticoïden"]],
+    ["ru", "Учебные новости"],
+    ["es", "Noticias para aprender"],
+    ["en", "Learning News"],
+    ["nl", "Leernieuws"],
   ];
 
-  for (const [pathname, heading, terms] of checks) {
+  for (const [language, heading] of checks) {
+    const pathname = `/${language}/library/news`;
     const response = await fetchFromWorker(pathname);
     assert.equal(response.status, 200, `${pathname} should resolve`);
     const html = await response.text();
-    assert.match(html, new RegExp(escapeRegExp(heading)), `${pathname} should show the localized glossary heading`);
-    for (const term of terms) {
-      assert.match(html, new RegExp(escapeRegExp(term)), `${pathname} should include the glossary term ${term}`);
-    }
+    assert.match(html, new RegExp(escapeRegExp(heading)), `${pathname} should show its heading`);
+    assert.match(html, new RegExp(`/${language}/library/scientific-news/psychiatric-genetics-14`));
+    assert.doesNotMatch(html, /demo-learning-news-01|2026 · demo|Demo: how stress changes|Демо: как стресс|Demo: cómo el estrés|Demo: hoe stress/i);
   }
 });
 
@@ -468,12 +458,13 @@ test("reader polish preserves sources, answer labels, availability and section o
   for (const language of languages) {
     const news = await (await fetchFromWorker("/" + language + "/library/news")).text();
     assert.doesNotMatch(news, /10\.0000\/demo-news\.none|Demo scientific source placeholder|href="#demo-source"/);
-    assert.match(news, /data-content-status="preview"/);
-    const radios = [...news.matchAll(/<input\b[^>]*type="radio"[^>]*>/g)].map(match => match[0]);
+    assert.doesNotMatch(news, /data-content-status="preview"|demo-learning-news-01/);
+    const lesson = await (await fetchFromWorker("/" + language + "/library/scientific-news/psychiatric-genetics-14")).text();
+    const radios = [...lesson.matchAll(/<input\b[^>]*type="radio"[^>]*>/g)].map(match => match[0]);
     assert.ok(radios.length > 0);
     for (const radio of radios) assert.doesNotMatch(radio, /aria-label=/);
-    assert.match(news, /<fieldset/);
-    assert.match(news, /<legend/);
+    assert.match(lesson, /<fieldset/);
+    assert.match(lesson, /<legend/);
     assert.match(news, /href="#main-content"/);
     assert.match(news, /id="main-content"[^>]*tabIndex="-1"/i);
     const header = news.match(/<header\b[\s\S]*?<\/header>/)[0];

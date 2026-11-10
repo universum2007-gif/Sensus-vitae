@@ -21,6 +21,6 @@ export function DestinationCards({ cards, label, lang }: {
   label: string; lang: Language; cards: { title: string; description: string; href: string; preparing?: boolean }[];
 }) {
   return <nav aria-label={label} className={`grid gap-4 sm:grid-cols-2 ${cards.length === 4 ? "lg:grid-cols-2" : "lg:grid-cols-3"}`}>
-    {cards.map(card => <NavigationCard key={card.href} {...card} lang={lang} status={card.preparing ? "preparing" : card.href.endsWith("/library/news") ? "preview" : undefined} action={destinationAction(card.href, lang, card.preparing)}/>)}
+    {cards.map(card => <NavigationCard key={card.href} {...card} lang={lang} status={card.preparing ? "preparing" : undefined} action={destinationAction(card.href, lang, card.preparing)}/>)}
   </nav>;
 }
