@@ -11,6 +11,7 @@ import { createPageMetadata, pageMetadataCopy } from "@/lib/metadata";
 
 import { DestinationCards } from "@/components/section-shell";
 import { homeDestinations, navigationCopy } from "@/lib/learning-navigation";
+import { russellQuote, russellSource } from "@/lib/philosophy-quotes";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
@@ -24,6 +25,7 @@ export default async function LanguageHome({ params }: { params: Promise<{ lang:
   if (!isLanguage(lang)) notFound();
   const t = ui[lang];
   const c = navigationCopy[lang];
+  const quote = russellQuote[lang];
   let articles: Array<{ slug: string; category: string; title: string; summary: string; readTime?: string; lang?: string; language?: string }> = staticArticles.filter((a) => a.lang === lang).slice(0, 3);
   try {
     const published = await getDb().select().from(posts).where(and(eq(posts.status, "published"), eq(posts.language, lang))).orderBy(desc(posts.createdAt)).limit(3);
@@ -35,7 +37,15 @@ export default async function LanguageHome({ params }: { params: Promise<{ lang:
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 lg:grid-cols-[1fr_.48fr] lg:items-center lg:py-14">
         <div>
           <p className="mb-4 text-xs font-bold tracking-[.18em] text-[#98722e]">{t.eyebrow}</p>
-          <h1 className="font-editorial max-w-4xl text-4xl font-bold leading-[1.04] sm:text-5xl lg:text-6xl">{t.title}</h1>
+          <figure className="max-w-4xl" data-quote="russell">
+            <blockquote cite={russellSource.href}>
+              <h1 className="font-editorial text-4xl font-bold leading-[1.16] text-[#173d30] sm:text-5xl lg:text-6xl">{quote.text}</h1>
+            </blockquote>
+            <figcaption className="mt-5 text-[#98722e]">
+              <span className="text-base font-medium sm:text-lg">— {quote.author}</span>
+              <span className="mt-1 block text-xs leading-6 text-[#607068]"><a className="sv-ui-link" href={russellSource.href}><cite className="not-italic">{russellSource.title}</cite> ({russellSource.year})</a></span>
+            </figcaption>
+          </figure>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-[#4b6256]">{t.intro}</p>
           <ul className="mt-6 grid gap-2.5 text-sm font-medium text-[#3f594d] sm:grid-cols-3">{t.valuePoints.map((point) => <li key={point} className="flex items-start gap-2"><span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-[#e4d6b7] text-[#174f3c]"><Check size={13} strokeWidth={3}/></span><span>{point}</span></li>)}</ul>
           <Link href={`/${lang}/library`} className="sv-ui-link mt-7 inline-flex min-h-11 items-center font-bold">{t.explore}</Link>
