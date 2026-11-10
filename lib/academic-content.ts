@@ -1,4 +1,5 @@
 import type { Language } from "@/lib/site-content";
+import { motivationPath, motivationTitle, motivationIntro } from './motivation-chapter-one';
 
 // Add only verified books and existing chapter routes; an empty list is planned content.
 export type AcademicBook = {
@@ -91,7 +92,13 @@ export const academicSubjects: { slug: string; categoryIndex: number; descriptio
     nl: "Studiemateriaal voor Inleiding tot data-analyse binnen de bacheloropleiding Psychologie van de UNED: hoofdstuksamenvattingen, kernbegrippen, formules, voorbeelden en oefeningen om je begrip te toetsen.",
   } },
   { slug: "research-methods", categoryIndex: 2, books: [] },
-  { slug: "motivation", categoryIndex: 3, books: [] },
+  { slug: "motivation", categoryIndex: 3, books: [{
+    id: 'uned-motivation-2026',
+    title: {ru:'Учебник психологии мотивации',es:'Manual de Psicología de la Motivación',en:'Textbook of Motivation Psychology',nl:'Handboek motivatiepsychologie'},
+    originalTitle:{text:'Manual de Psicología de la Motivación',language:'es'},
+    source:{authors:'Menéndez Balaña, F. J.; Rivero Expósito, M. P.; Sanz Aparicio, M. T.; Toril Barrera, M. P. (coord.)',year:2026,edition:{ru:'1-е издание',es:'1.ª edición',en:'1st edition',nl:'1e druk'}},
+    chapters:[{number:1,path:motivationPath,title:motivationTitle,description:motivationIntro}],
+  }] },
   { slug: "social-psychology", categoryIndex: 4, books: [] },
   { slug: "history-of-psychology", categoryIndex: 5, books: [] },
 ];
