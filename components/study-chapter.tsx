@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { Language } from "@/lib/site-content";
 
 const labels = {
@@ -22,9 +23,10 @@ function chapterSections(html: string, sectionIds: readonly string[]) {
   };
 }
 
-export function StudyChapter({ lang, title, subtitle, subject, subjectPath, currentLabel, chaptersLabel, html, sectionIds, introductorySectionId }: {
+export function StudyChapter({ lang, title, subtitle, subject, subjectPath, currentLabel, chaptersLabel, html, sectionIds, introductorySectionId, afterContent }: {
   lang: Language; title: string; subtitle: string; subject: string; subjectPath: string;
   currentLabel: string; chaptersLabel?: string; html: string; sectionIds: readonly string[]; introductorySectionId?: string;
+  afterContent?: ReactNode;
 }) {
   const copy = labels[lang];
   const content = chapterSections(html, sectionIds);
@@ -52,6 +54,7 @@ export function StudyChapter({ lang, title, subtitle, subject, subjectPath, curr
         </li>)}</ol>
       </nav>
       <div dangerouslySetInnerHTML={{ __html: content.sections.map(section => section.html).join("") }}/>
+      {afterContent}
     </article>
   </main>;
 }
