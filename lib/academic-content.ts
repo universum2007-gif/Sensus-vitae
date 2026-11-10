@@ -1,5 +1,6 @@
 import type { Language } from "@/lib/site-content";
 import { motivationPath, motivationTitle, motivationIntro } from './motivation-chapter-one';
+import { tema2Path, tema2CardTitle, tema2Intro } from './motivation-chapter-two';
 
 // Add only verified books and existing chapter routes; an empty list is planned content.
 export type AcademicBook = {
@@ -97,7 +98,7 @@ export const academicSubjects: { slug: string; categoryIndex: number; descriptio
     title: {ru:'Учебник психологии мотивации',es:'Manual de Psicología de la Motivación',en:'Textbook of Motivation Psychology',nl:'Handboek motivatiepsychologie'},
     originalTitle:{text:'Manual de Psicología de la Motivación',language:'es'},
     source:{authors:'Menéndez Balaña, F. J.; Rivero Expósito, M. P.; Sanz Aparicio, M. T.; Toril Barrera, M. P. (coord.)',year:2026,edition:{ru:'1-е издание',es:'1.ª edición',en:'1st edition',nl:'1e druk'}},
-    chapters:[{number:1,path:motivationPath,title:motivationTitle,description:motivationIntro}],
+    chapters:[{number:1,path:motivationPath,title:motivationTitle,description:motivationIntro},{number:2,path:tema2Path,title:tema2CardTitle,description:tema2Intro}],
   }] },
   { slug: "social-psychology", categoryIndex: 4, books: [] },
   { slug: "history-of-psychology", categoryIndex: 5, books: [] },
@@ -109,4 +110,3 @@ export const dataAnalysisLayoutCopy = {
   en: { subtitle: "Introduction to Data Analysis · Psychology degree · UNED", chapter: "Chapter", intro: "Summaries, key concepts, formulas, examples and exercises for UNED’s Introduction to Data Analysis course." },
   nl: { subtitle: "Inleiding tot data-analyse · Bacheloropleiding Psychologie · UNED", chapter: "Hoofdstuk", intro: "Samenvattingen, kernbegrippen, formules, voorbeelden en oefeningen voor het UNED-vak Inleiding tot data-analyse." },
 };
-
