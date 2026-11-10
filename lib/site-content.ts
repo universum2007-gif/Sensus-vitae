@@ -1,4 +1,5 @@
 import { articleTranslations } from "./article-translations";
+import { personalityGeneticsLearning, personalityGeneticsSlug, personalityGeneticsSource } from './personality-genetics-learning';
 export const languages = ["ru", "es", "en", "nl"] as const;
 export type Language = (typeof languages)[number];
 export const isLanguage = (value: string): value is Language => languages.includes(value as Language);
@@ -34,6 +35,10 @@ export const staticArticles: StaticArticle[] = languages.flatMap(lang =>
     const article = articleTranslations.find(a => a.lang === lang && a.slug === original.slug)
       ?? originalArticles.find(a => a.lang === lang && a.slug === original.slug);
     if (!article) throw new Error(`Missing translation: ${lang}/${original.slug}`);
+    if (article.slug === personalityGeneticsSlug) {
+      const lesson = personalityGeneticsLearning[lang];
+      return { ...article, body: lesson.body, readTime: lesson.readTime, source: personalityGeneticsSource };
+    }
     return article;
   })
 );
