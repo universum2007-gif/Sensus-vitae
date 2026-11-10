@@ -27,7 +27,7 @@ test('76 minimum requirements map once to substantive sections in all four compl
  }
 });
 test('one canonical chapter card per language, with all real section anchors and no database calls',async()=>{
- const subject=academicSubjects.find(s=>s.slug==='motivation');assert.equal(subject.books.length,1);assert.equal(subject.books[0].chapters.length,1);
+ const subject=academicSubjects.find(s=>s.slug==='motivation');assert.equal(subject.books.length,1);assert.equal(subject.books[0].chapters.length,2);
  const DB=new Proxy({},{get(){throw Error('The motivation study chapter must not access D1');}});
  for(const lang of langs){
   const path=`/${lang}/${m.motivationPath}`;
